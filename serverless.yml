@@ -116,12 +116,13 @@ custom:
 functions:
   defaultFunction:
     enabled: true
-    handler: 'src/main/routes/default-function-route.getDefaultFunctionHandler'
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/api-docs-route.getApiDocsHandler'
     events:
       - http:
           path: /default-function
           method: get
-          cors: true
           private: true
 
   apiDocs:
