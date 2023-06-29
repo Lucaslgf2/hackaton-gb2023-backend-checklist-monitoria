@@ -21,6 +21,21 @@
   ],
 
   "paths": {
+    "/default-function": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para exibição do cartão de 'Receita (Geral)'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
 
   },
 

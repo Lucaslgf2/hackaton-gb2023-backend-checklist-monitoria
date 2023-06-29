@@ -1,0 +1,18 @@
+import { I{{pascalCase name}}Repo, Ns{{pascalCase name}}Repo } from '@/data/protocols/{{dashCase name}}/{{dashCase name}}-repo-protocol'
+import { IFind{{pascalCase name}}, Ns{{pascalCase name}} } from '@/domain/protocols/{{dashCase name}}/{{dashCase name}}-protocol'
+
+export class Find{{pascalCase name}} implements IFind{{pascalCase name}} {
+  constructor (
+    private readonly {{camelCase name}}Repo: I{{pascalCase name}}Repo
+  ) {}
+
+  async find (params: Ns{{pascalCase name}}.Input): Promise<Ns{{pascalCase name}}.Output> {
+    const dbRows = await this.{{camelCase name}}Repo.select(params)
+    const result = this.formatResult(params, dbRows)
+    return result
+  }
+
+  private formatResult (input: Ns{{pascalCase name}}.Input, dbRows: Ns{{pascalCase name}}Repo.Output): Ns{{pascalCase name}}.Output {
+    return dbRows
+  }
+}

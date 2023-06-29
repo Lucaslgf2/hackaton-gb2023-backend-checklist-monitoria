@@ -1,0 +1,11 @@
+import { IDefaultFiltersModel } from '@/domain/models/default-filters-model'
+
+export namespace Ns{{pascalCase name}} {
+  export type Input = Pick<IDefaultFiltersModel, 'dashViewName' | 'revenueType' | 'startCurrentDate' | 'endCurrentDate' | 'startPreviousDate' | 'endPreviousDate' | 'cps' | 'pdvs' | 'channels' | 'bUnits' | 'cities' | 'ufs'>
+
+  export type Output = [] | undefined
+}
+
+export interface IFind{{pascalCase name}} {
+  find: (params: Ns{{pascalCase name}}.Input) => Promise<Ns{{pascalCase name}}.Output>
+}

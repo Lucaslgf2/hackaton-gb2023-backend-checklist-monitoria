@@ -1,0 +1,56 @@
+import { IAwsS3 } from '@/data/protocols/infra-adapters/aws-sdk/aws-s3-protocol'
+import { IExcelJs } from '@/data/protocols/infra-adapters/excel-js/excel-js-protocol'
+import { ICreateFile{{pascalCase name}}, IFind{{pascalCase name}}, Ns{{pascalCase name}} } from '@/domain/protocols/{{dashCase name}}/{{dashCase name}}-protocol'
+import { IGenerateFileName } from '@/domain/protocols/utils/generate-file-name-protocol'
+import { IColumns } from '@/infra/adapters/excel-js/excel-js-adapter'
+
+export class CreateFile{{pascalCase name}} implements ICreateFile{{pascalCase name}} {
+  constructor (
+    private readonly find{{pascalCase name}}: IFind{{pascalCase name}},
+    private readonly excelJsAdapter: IExcelJs,
+    private readonly generateFileName: IGenerateFileName,
+    private readonly awsS3Adapter: IAwsS3
+  ) {}
+
+  private readonly defaultColumns: IColumns = [
+    {
+      header: 'COLUNA',
+      key: 'columnName',
+      width: 25,
+      style: { alignment: { horizontal: 'center' } }
+    }
+  ]
+
+  async createXls (params: Ns{{pascalCase name}}.Input): Promise<string | undefined> {
+    this.excelJsAdapter.createWorkbook({
+      revenueType: params.revenueType,
+      startCurrentDate: params.startCurrentDate,
+      endCurrentDate: params.endCurrentDate,
+      startPreviousDate: params.startPreviousDate,
+      endPreviousDate: params.endPreviousDate,
+      pdvs: params.pdvs,
+      channels: params.channels,
+      bUnits: params.bUnits
+    })
+
+    const data = await this.find{{pascalCase name}}.find(params)
+    if (data) {
+      this.composeWorksheet(data)
+    }
+
+    const buffer = await this.excelJsAdapter.getFileBuffer()
+    const fileName = this.generateFileName.generate('Nome_do_Arquivo', params.dashViewName)
+    return this.awsS3Adapter.streamFileToS3(buffer, fileName)
+  }
+
+  private composeWorksheet (data: Ns{{pascalCase name}}.Output): void {
+    const worksheetName = 'NOME DA ABA'
+
+    this.excelJsAdapter.addWorksheet(worksheetName)
+    this.excelJsAdapter.setColumns(worksheetName, this.defaultColumns)
+
+    this.excelJsAdapter.addRow(worksheetName, {
+      columnName: 1
+    })
+  }
+}

@@ -116,7 +116,7 @@ custom:
 functions:
   defaultFunction:
     enabled: true
-    handler: src/defaultFunction.handler
+    handler: 'src/main/routes/default-function-route.getDefaultFunctionHandler'
     events:
       - http:
           path: /default-function

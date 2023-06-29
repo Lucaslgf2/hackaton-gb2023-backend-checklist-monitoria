@@ -1,0 +1,13 @@
+import { adaptServerlessRoute, IHandlerContext, IHandlerEvent } from '@/main/adapters/serverless/serverless-route-adapter'
+import { adaptRouteCache } from '@/main/adapters/serverless/serverless-route-cache'
+import { loadAwsSecrets } from '@/main/config/load-aws-secrets'
+import { make{{pascalCase verb}}{{pascalCase name}}Controller } from '@/main/factories/controllers/{{dashCase name}}//{{dashCase verb}}-{{dashCase name}}-controller-factory'
+import { makeDefaultMiddlewares } from '@/main/factories/middlewares/default-middlewares-factory'
+import { IHttpResponse } from '@/presentation/protocols'
+
+export const {{dashCase verb}}{{pascalCase name}}Handler = async (event: IHandlerEvent, context: IHandlerContext): Promise<IHttpResponse> => {
+  await loadAwsSecrets()
+  const controller = make{{pascalCase verb}}{{pascalCase name}}Controller()
+  const middlewares = makeDefaultMiddlewares()
+  return adaptRouteCache(adaptServerlessRoute(controller, middlewares))(event, context)
+}

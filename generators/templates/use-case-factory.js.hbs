@@ -1,0 +1,7 @@
+import { Find{{pascalCase name}} } from '@/data/use-cases/{{dashCase name}}/find-{{dashCase name}}'
+import { IFind{{pascalCase name}} } from '@/domain/protocols/{{dashCase name}}/{{dashCase name}}-protocol'
+import { make{{pascalCase name}}Repository } from '@/main/factories/repositories/{{dashCase name}}-repository-factory'
+
+export const makeFind{{pascalCase name}} = (): IFind{{pascalCase name}} => {
+  return new Find{{pascalCase name}}(make{{pascalCase name}}Repository())
+}

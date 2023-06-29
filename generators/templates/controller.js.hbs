@@ -1,0 +1,45 @@
+import { IFind{{pascalCase name}} } from '@/domain/protocols/{{dashCase name}}/{{dashCase name}}-protocol'
+import ErrorHandler from '@/presentation/http/error-handler'
+import { badRequest, notFound, ok } from '@/presentation/http/http-status'
+import { IController, IHttpRequest, IHttpResponse, IValidation } from '@/presentation/protocols'
+
+export class {{pascalCase verb}}{{pascalCase name}}Controller implements IController {
+  constructor (
+    private readonly validation: IValidation,
+    private readonly find{{pascalCase name}}: IFind{{pascalCase name}}
+  ) {}
+
+  @ErrorHandler()
+  async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
+    const error = this.validation.validate(httpRequest.queryParams)
+    if (error) {
+      return badRequest(error)
+    }
+
+    if (httpRequest.filters) {
+      // const { cpCode } = httpRequest.pgiAuth
+      // const { download } = httpRequest.queryParams
+      const { dashViewName, revenueType, startCurrentDate, endCurrentDate, startPreviousDate, endPreviousDate, /* aggregation, */ cps, pdvs, channels, bUnits, /* consultants, */ cities, ufs } = httpRequest.filters
+
+      const result = await this.find{{pascalCase name}}.find({
+        dashViewName,
+        revenueType,
+        startCurrentDate,
+        endCurrentDate,
+        startPreviousDate,
+        endPreviousDate,
+        // aggregation,
+        cps,
+        pdvs,
+        channels,
+        // consultants,
+        bUnits,
+        cities,
+        ufs
+      })
+      return result ? ok(result) : notFound()
+    } else {
+      return notFound()
+    }
+  }
+}
