@@ -1,5 +1,5 @@
 import { IAuditoriaRepo, NsAuditoriaRepo } from '@/data/protocols/auditoria/auditoria-repo-protocol'
-import { TypeORMConnection } from '../typeorm-connection'
+import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class AuditoriaRepository extends TypeORMConnection implements IAuditoriaRepo {
   async select (params: NsAuditoriaRepo.Input): Promise<NsAuditoriaRepo.Output> {

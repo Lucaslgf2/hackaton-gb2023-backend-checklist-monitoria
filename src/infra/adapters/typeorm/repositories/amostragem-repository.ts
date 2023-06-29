@@ -1,5 +1,5 @@
 import { IAmostragemRepo, NsAmostragemRepo } from '@/data/protocols/amostragem/amostragem-repo-protocol'
-import { TypeORMConnection } from '../typeorm-connection'
+import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class AmostragemRepository extends TypeORMConnection implements IAmostragemRepo {
   async select (params: NsAmostragemRepo.Input): Promise<NsAmostragemRepo.Output> {

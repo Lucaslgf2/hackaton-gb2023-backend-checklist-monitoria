@@ -4,6 +4,6 @@ export namespace NsMonitoria {
   export type Output = [] | undefined
 }
 
-export interface IFindMonitoria {
-  find: (params: NsMonitoria.Input) => Promise<NsMonitoria.Output>
+export interface ISaveMonitoria {
+  save: (params: NsMonitoria.Input) => Promise<NsMonitoria.Output>
 }

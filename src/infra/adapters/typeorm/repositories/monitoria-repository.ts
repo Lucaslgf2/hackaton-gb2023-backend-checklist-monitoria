@@ -1,5 +1,5 @@
 import { IMonitoriaRepo, NsMonitoriaRepo } from '@/data/protocols/monitoria/monitoria-repo-protocol'
-import { TypeORMConnection } from '../typeorm-connection'
+import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class MonitoriaRepository extends TypeORMConnection implements IMonitoriaRepo {
   async select (params: NsMonitoriaRepo.Input): Promise<NsMonitoriaRepo.Output> {

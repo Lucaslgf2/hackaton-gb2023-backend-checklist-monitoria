@@ -1,5 +1,5 @@
 import { IConsultorRepo, NsConsultorRepo } from '@/data/protocols/consultor/consultor-repo-protocol'
-import { TypeORMConnection } from '../typeorm-connection'
+import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class ConsultorRepository extends TypeORMConnection implements IConsultorRepo {
   async select (params: NsConsultorRepo.Input): Promise<NsConsultorRepo.Output> {

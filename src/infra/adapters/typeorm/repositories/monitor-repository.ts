@@ -1,5 +1,5 @@
 import { IMonitorRepo, NsMonitorRepo } from '@/data/protocols/monitor/monitor-repo-protocol'
-import { TypeORMConnection } from '../typeorm-connection'
+import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class MonitorRepository extends TypeORMConnection implements IMonitorRepo {
   async select (params: NsMonitorRepo.Input): Promise<NsMonitorRepo.Output> {
