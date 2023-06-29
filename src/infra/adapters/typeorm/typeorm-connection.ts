@@ -1,22 +1,11 @@
-import { makeEnvVariables } from '@/main/config/envVariables'
 import { DataSource } from 'typeorm'
+import { MySqlDataSource } from './data-source.ts'
 
 export abstract class TypeORMConnection {
   private readonly appDataSource: DataSource
 
   constructor () {
-    const envVariables = makeEnvVariables()
-    this.appDataSource = new DataSource({
-      type: 'mysql',
-      host: envVariables.mySql.host,
-      port: envVariables.mySql.port,
-      username: envVariables.mySql.username,
-      password: envVariables.mySql.password,
-      database: envVariables.mySql.database,
-      multipleStatements: true,
-      logging: true,
-      cache: true
-    })
+    this.appDataSource = MySqlDataSource
   }
 
   protected async connect (): Promise<void> {

@@ -20,7 +20,11 @@
     "test:watch": "npm run test:unit -- --watch",
     "test:staged": "npm run test:unit -- --findRelatedTests",
     "test:coverage": "npm run test:unit -- --coverage",
-    "generate": "plop --plopfile ./generators/plopfile.js"
+    "generate": "plop --plopfile ./generators/plopfile.js",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:create": "npm run typeorm migration:create -- ./src/infra/adapters/typeorm/migrations/new",
+    "migration:run": "npm run typeorm migration:run -- -d ./src/infra/adapters/typeorm/data-source.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d ./src/infra/adapters/typeorm/data-source.ts"
   },
   "repository": {
     "type": "git",
@@ -102,7 +106,6 @@
     "exceljs": "^4.3.0",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
-    "mysql2": "^3.4.2",
     "node-cache": "^5.1.2",
     "redis": "^4.6.6",
     "reflect-metadata": "^0.1.13",
