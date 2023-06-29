@@ -118,12 +118,25 @@ functions:
     enabled: true
     disableLogs: true
     architecture: ${self:provider.architecture}
-    handler: 'src/main/routes/api-docs-route.getApiDocsHandler'
+    handler: 'src/main/routes/default-function-route.getApiDocsHandler'
     events:
       - http:
           path: /default-function
           method: get
+          cors:
+            origin: '*'
+            headers: '*'
           private: true
+
+  envVariables:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/env-variables-route.getEnvVariablesHandler'
+    events:
+      - http:
+          path: /env-variables
+          method: get
 
   apiDocs:
     enabled: true
