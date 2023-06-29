@@ -3,7 +3,11 @@ import { TypeORMConnection } from '../typeorm-connection'
 
 export class AuditoriaRepository extends TypeORMConnection implements IAuditoriaRepo {
   async select (params: NsAuditoriaRepo.Input): Promise<NsAuditoriaRepo.Output> {
-    const querySql = 'SELECT * FROM Auditoria'
+    const querySql = `
+      SELECT
+        *
+      FROM Auditoria
+    `
 
     const sqlParams: any[] = []
 
