@@ -1,0 +1,22 @@
+metadata:
+  tags:
+    - serverless
+    - api
+    - node
+    - javascript
+  name: auditoria-back
+  description: Back do sistema de auditoria
+  annotations:
+    github.com/project-slug: gbhackathon/hack-hackathon-auditoria-back
+    github.com/team-slug: gbhackathon/auditoriaatendimento
+    argocd/app-selector: app=auditoria-back
+    argocd/proxy-url: /argocd/hackathon
+    newrelic/entity-name: auditoria-back
+spec:
+  lifecycle: experimental
+  type: service
+  owner: auditoriaatendimento
+  system: hackathon
+  domain: hackathon
+apiVersion: backstage.io/v1alpha1
+kind: Component

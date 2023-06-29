@@ -1,7 +1,7 @@
 {
-  "name": "pdd-template-javascript-serverless",
-  "version": "1.0.1",
-  "description": "Creates an aws lambda",
+  "name": "auditoria-back",
+  "version": "1.0.0",
+  "description": "Back do sistema de auditoria",
   "scripts": {
     "update-readme": "scafflater-cli partial:run update-readme",
     "build": "./scripts.sh build",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grupoboticario/pdd-template-javascript-serverless.git"
+    "url": "git+https://github.com/gbhackathon/hack-hackathon-auditoria-back.git"
   },
   "keywords": [
     "scafflater",
@@ -33,12 +33,12 @@
     "node": "18",
     "npm": "9"
   },
-  "author": "PDD - Grupo Boticário",
+  "author": "Grupo Boticário",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/grupoboticario/pdd-template-javascript-serverless/issues"
+    "url": "https://github.com/gbhackathon/hack-hackathon-auditoria-back/issues"
   },
-  "homepage": "https://github.com/grupoboticario/pdd-template-javascript-serverless#readme",
+  "homepage": "https://github.com/gbhackathon/hack-hackathon-auditoria-back#readme",
   "devDependencies": {
     "dotenv": "^16.1.3",
     "eslint": "^8.41.0",

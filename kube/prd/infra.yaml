@@ -1,0 +1,55 @@
+infra:
+  iamsecrets:
+    enable: true
+    name: auditoria-back
+    namespace: hackathon
+    awsAccount: '434058138405'
+    awsRegion: us-east-1
+  iamparameterstore:
+    enable: true
+    name: auditoria-back
+    namespace: hackathon
+    awsAccount: '434058138405'
+    awsRegion: us-east-1
+  rolesls:
+    enable: true
+    name: auditoria-back
+    namespace: hackathon
+  iamsls:
+    enable: true
+    name: auditoria-back
+    namespace: hackathon
+  rds:
+    enable: true
+    instances:
+      - name: auditoria-atendimento
+        namespace: hackathon
+        dbInstanceClass: db.t4g.micro
+        engine: mysql
+        dbParameterGroupFamily: mysql8.0
+        dbname: audit
+        allocatedStorage: 20
+        storageType: gp3
+        backupRetentionPeriod: 10
+        dbSubnetGroupName: crossplane-subnet-group
+        engineVersion: 8.0.28
+        publiclyAccessible: false
+        multiAZ: false
+        port: 3306
+        region: us-east-1
+        securityGroupId: sg-0413b0755b3411aea
+        tags:
+          - key: Name
+            value: audit
+          - key: VS
+            value: hackathon
+          - key: Environment
+            value: prd
+          - key: Squad
+            value: auditoriaatendimento
+          - key: Tier
+            value: backend
+          - key: Product
+            value: hackathon
+          - key: App
+            value: auditoria-back

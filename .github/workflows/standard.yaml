@@ -1,33 +1,36 @@
-# @scf-option {"ignore": true}
 on:
   push:
     branches:
       - main
       - develop
-      - "feature/**"
-      - "fix/**"
-      - "release/**"
+      - 'feature/**'
+      - 'fix/**'
+      - 'release/**'
     paths-ignore:
-      - "**/*.md"
-      - .scafflater/**
+      - '**/*.md'
+      - '.scafflater/**'
   pull_request:
     branches:
       - main
     paths-ignore:
-      - "**/*.md"
-      - .scafflater/**
+      - '**/*.md'
+      - '.scafflater/**'
   workflow_dispatch:
 
 name: Standard
 
 env:
-  app_name: pdd-template-javascript-serverless
+  app_name: 'auditoria-back'
+  aws_region_prd: 'us-east-1'
+  enable_api_gateway: 'true'
+  enable_vpc: 'true'
+  namespace: 'hackathon'
+  value_stream: 'hackathon'
 
 jobs:
   ci:
     name: CI - Build and Test
-    if: ${{ github.run_number != '1' }}
-    runs-on: [self-hosted, core-shr]
+    runs-on: ['self-hosted', 'vs-hackathon']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -49,51 +52,37 @@ jobs:
       # - name: Sonar Analysis
       #   uses: sonarsource/sonarcloud-github-action@master
       #   if: ${{ vars.SONAR_ENABLED == 'true' }}
-      #   with:
-      #     args: >
-      #       -Dsonar.organization=gboticario
-      #       -Dsonar.projectKey=${{ env.app_name }}
-      #       -Dsonar.projectName=${{ env.app_name }}
-      #       -Dsonar.language=js
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
-  ci_dependabot_automerge:
-    name: CI - Dependabot Automerge
-    if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' }}
-    runs-on: [self-hosted, core-shr]
+  cd_prd:
+    name: CD - PRD
+    if: ${{ success() && github.event_name != 'pull_request' && github.actor != 'dependabot[bot]' }}
+    runs-on: ['self-hosted', 'vs-hackathon']
     needs: [ci]
-    env:
-      GH_GB_TOKEN: ${{ secrets.DEPENDABOT_AUTO_MERGE }}
+    environment:
+      name: prd
+      url: ${{ steps.actions-cd-app.outputs.environmentUrl }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Dependabot
-        id: dependabot
-        uses: dependabot/fetch-metadata@v1
+      - name: Deploy Infra
+        uses: gbhackathon/actions-cd-eks@v1
+        id: actions-cd-infra
         with:
-          github-token: ${{ env.GH_GB_TOKEN }}
-      - name: Auto Merge Condition
-        id: auto-merge
-        if: |
-          (
-            steps.dependabot.outputs.update-type == 'version-update:semver-patch'
-          ) || (
-            steps.dependabot.outputs.update-type == 'version-update:semver-minor'
-          )
-        run: echo "::notice ::auto-merge conditions satisfied"
-      - name: Approve PR
-        if: ${{ steps.auto-merge.conclusion == 'success' }}
-        run: gh pr review ${{ github.event.number }} --approve
-        env:
-          GH_TOKEN: ${{ env.GH_GB_TOKEN }}
-      - name: Comment PR LGTM
-        if: ${{ steps.auto-merge.conclusion == 'success' }}
-        run: gh pr comment ${{ github.event.number }} --body "LGTM"
-        env:
-          GH_TOKEN: ${{ env.GH_GB_TOKEN }}
-      - name: PR Merge
-        if: ${{ steps.auto-merge.conclusion == 'success' }}
-        run: gh pr merge ${{ github.event.number }} --squash
-        env:
-          GH_TOKEN: ${{ env.GH_GB_TOKEN }}
+          appName: ${{ env.app_name }}
+          awsRegion: ${{ env.aws_region_prd }}
+          environment: prd
+          namespace: ${{ env.namespace }}
+          type: infra
+          vs: ${{ env.value_stream }}
+      - name: Deploy Serverless
+        uses: gbhackathon/actions-cd-serverless@v3
+        id: actions-cd-app
+        with:
+          appName: ${{ env.app_name }}
+          enableApiGateway: ${{ env.enable_api_gateway }}
+          enableVpc: ${{ env.enable_vpc }}
+          environment: prd
+          nodeAuthToken: ${{ secrets.GHA_PACKAGES }}
+          vs: ${{ env.value_stream }}

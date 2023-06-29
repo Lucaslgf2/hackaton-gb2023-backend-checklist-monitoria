@@ -1,21 +1,20 @@
-service: pdd-template-javascript-serverless
-
+service: auditoria-back
 frameworkVersion: '3'
-
 useDotenv: true
 configValidationMode: warn
-
 plugins:
   - serverless-plugin-lambda-insights
   - serverless-prune-plugin
   - serverless-plugin-conditional-functions
   - serverless-newrelic-lambda-layers
   - serverless-offline
-
+  - serverless-associate-waf
+  - serverless-domain-manager
 provider:
   name: aws
   architecture: arm64
-  memorySize: ${file(./resources/serverless.${self:provider.stage}.yml):provider.memorySize}
+  memorySize: >-
+    ${file(./resources/serverless.${self:provider.stage}.yml):provider.memorySize}
   region: ${opt:region}
   stage: ${opt:stage}
   runtime: nodejs18.x
@@ -31,46 +30,57 @@ provider:
     Environment: ${self:provider.stage}
     Name: ${self:service}
     Entity: ${env:VS}
-    Product: ${self:service}
+    Product: hackathon
     Service-Provided: lambda
-    Squad: pdd
+    Squad: auditoriaatendimento
     Tier: backend
     VS: ${env:VS}
   deploymentBucket:
     name: sls-vs-${env:VS}-${self:provider.stage}-deployment
   environment: ${file(./resources/serverless.${self:provider.stage}.yml):environment}
-
+  apiGateway:
+    apiKeys:
+      - name: ${self:service}-${self:provider.stage}
+        description: api key ${self:service} de ${self:provider.stage}
+    apiKeySourceType: HEADER
+    disableDefaultEndpoint: true
+  logs:
+    restApi:
+      accessLogging: false
+      executionLogging: true
+  tracing:
+    apiGateway: true
+  vpc: ${file(./resources/serverless.${self:provider.stage}.yml):provider.vpc}
 package:
   individually: false
   excludeDevDependencies: true
   patterns:
     - src/**
-    - "!.github/**"
-    - "!.scafflater/**"
-    - "!.scannerwork/**"
-    - "!.vscode/**"
-    - "!coverage/**"
-    - "!dist-*/**"
-    - "!dist/**"
-    - "!kube/**"
-    - "!resources/**"
-    - "!test/**"
-    - "!.editorconfig"
-    - "!.eslintrc.json"
-    - "!.gitignore"
-    - "!.nvmrc"
-    - "!.prettier*"
-    - "!catalog-info.yaml"
-    - "!jest.config.js"
-    - "!package.json"
-    - "!package-lock.json"
-    - "!Jenkinsfile"
-    - "!jenkins.env"
-    - "!README.md"
-    - "!scripts.sh"
-    - "!serverless.yml"
-    - "!sonar-project.properties"
-
+    - '!.github/**'
+    - '!.scafflater/**'
+    - '!.scannerwork/**'
+    - '!.vscode/**'
+    - '!coverage/**'
+    - '!dist-*/**'
+    - '!dist/**'
+    - '!kube/**'
+    - '!resources/**'
+    - '!test/**'
+    - '!.editorconfig'
+    - '!.eslintrc.json'
+    - '!.gitignore'
+    - '!.nvmrc'
+    - '!.prettier*'
+    - '!catalog-info.yaml'
+    - '!jest.config.js'
+    - '!package.json'
+    - '!package-lock.json'
+    - '!Jenkinsfile'
+    - '!jenkins.env'
+    - '!README.md'
+    - '!scripts.sh'
+    - '!serverless.yml'
+    - '!sonar-project.properties'
 custom:
   lambdaInsights:
     defaultLambdaInsights: true
@@ -86,8 +96,22 @@ custom:
   prune:
     automatic: true
     number: 3
-
+  associateWaf:
+    name: acl-backend
+    version: V2
+  customDomain:
+    enabled: true
+    domainName: ${self:service}.hack.gb.tech
+    stage: ${self:provider.stage}
+    createRoute53Record: false
+    basePath: ''
 functions:
   defaultFunction:
     enabled: true
     handler: src/defaultFunction.handler
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+          private: true

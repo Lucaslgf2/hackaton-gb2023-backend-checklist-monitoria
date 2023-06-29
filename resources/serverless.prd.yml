@@ -1,9 +1,12 @@
-# Description: Serverless configuration for prd environment
-
 provider:
   memorySize: 256
   timeout: 6
-
+  vpc:
+    securityGroupIds:
+      - sg-0254e55e977f8cbe2
+    subnetIds:
+      - subnet-07003e61aa538b0d3
+      - subnet-08b21520f5213826f
 environment:
   AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
   NODE_ENV: production

@@ -1,95 +1,11 @@
 {
-  "template": {
-    "name": "pdd-template-javascript-serverless",
-    "description": "Creates an aws lambda",
-    "version": "1.0.0",
-    "parameters": [
-      {
-        "type": "input",
-        "name": "domain",
-        "message": "VS or Chapter",
-        "regex": "[a-z0-9-]+",
-        "scope": "global"
-      },
-      {
-        "type": "input",
-        "name": "component",
-        "message": "Component Name",
-        "regex": "[a-z0-9-]+",
-        "scope": "global"
-      },
-      {
-        "type": "input",
-        "name": "system",
-        "message": "Project or Product",
-        "regex": "[a-z0-9-]+",
-        "scope": "global"
-      },
-      {
-        "type": "input",
-        "name": "team",
-        "message": "Team name",
-        "regex": "^[a-z|A-Z]+",
-        "scope": "global"
-      },
-      {
-        "name": "componentDescription",
-        "type": "input",
-        "message": "Component Description",
-        "regex": "^(\\w|\\s){1,500}$",
-        "scope": "global"
-      },
-      {
-        "name": "enableApiGateway",
-        "type": "list",
-        "message": "Enable API gateway?",
-        "default": "No",
-        "choices": [
-          {
-            "name": "Yes"
-          },
-          {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "enableStepFunction",
-        "type": "list",
-        "message": "Enable Step Functions?",
-        "default": "No",
-        "choices": [
-          {
-            "name": "Yes"
-          },
-          {
-            "name": "No"
-          }
-        ]
-      },
-      {
-        "name": "enableVpc",
-        "type": "list",
-        "message": "Enable VPC?",
-        "default": "No",
-        "choices": [
-          {
-            "name": "Yes"
-          },
-          {
-            "name": "No"
-          }
-        ]
-      }
-    ]
-  },
   "templates": [
     {
-      "name": "scafflater-template",
-      "version": "0.0.1",
+      "name": "pdd-template-javascript-serverless",
+      "version": "1.0.0",
       "source": {
         "name": "github",
-        "key": "https://github.com/scafflater/scafflater-template",
+        "key": "https://github.com/gbhackathon/pdd-template-javascript-serverless",
         "options": {
           "baseUrl": "https://github.com",
           "baseUrlApi": "https://api.github.com"
@@ -97,24 +13,1365 @@
       },
       "partials": [
         {
-          "name": "add-partial",
+          "name": "configure-vpc",
           "parameters": {
-            "name": "add-step-function",
-            "description": "add-step-function"
-          }
-        },
-        {
-          "name": "add-partial",
-          "parameters": {
-            "name": "configure-vpc",
-            "description": "Configure VPC"
+            "domain": "hackathon",
+            "component": "auditoria-back",
+            "system": "hackathon",
+            "team": "auditoriaatendimento",
+            "componentDescription": "Back do sistema de auditoria",
+            "services": [
+              {
+                "rdsInstanceClassMySQL": "db.t4g.micro",
+                "service": "rds",
+                "rdsInstanceName": "auditoria-atendimento",
+                "rdsDbName": "audit",
+                "rdsEngine": "mysql",
+                "rdsEngineVersionMySQL": "8.0.28"
+              }
+            ],
+            "githubUser": {
+              "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+              "displayName": "ribeirocostar",
+              "email": "ribeirocostar@users.noreply.github.com"
+            },
+            "repositoryName": "hack-hackathon-auditoria-back",
+            "domainInfo": {
+              "name": "hackathon",
+              "acronym": "hack",
+              "description": "Hackathon 2023",
+              "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+              "github": {
+                "team": "hackathon",
+                "devops-team": "devops-pdd",
+                "runner-group": "vs-hackathon"
+              },
+              "argocd": {
+                "url": "https://argocd.hack.gb.tech"
+              },
+              "crossplane": {
+                "dev": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "hml": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "prd": {
+                  "awsProviderVersion": "v0.26.1"
+                }
+              },
+              "helm-charts": {
+                "gb-app": {
+                  "prd": {
+                    "revision": "gb-app-0.2.12"
+                  }
+                },
+                "gb-infra": {
+                  "dev": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "hml": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "prd": {
+                    "revision": "gb-infra-0.1.108"
+                  }
+                }
+              },
+              "aws": {
+                "prd": {
+                  "account-id": "434058138405",
+                  "default-region": "us-east-1",
+                  "eks": {
+                    "clusters": {
+                      "default": {
+                        "name": "eks-hackathon-prd",
+                        "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                      }
+                    }
+                  },
+                  "cloudfront": {
+                    "oai": "E3NB7GREJS5UQ1"
+                  },
+                  "security-groups": {
+                    "rds-instance-mysql": "sg-0413b0755b3411aea",
+                    "rds-instance-postgres": "sg-0413b0755b3411aea",
+                    "lambda-internal": "sg-0254e55e977f8cbe2"
+                  },
+                  "subnets": {
+                    "private": {
+                      "subnet-1": "subnet-07003e61aa538b0d3",
+                      "subnet-2": "subnet-08b21520f5213826f"
+                    }
+                  }
+                },
+                "shr": {
+                  "account-id": "649511289351",
+                  "default-region": "us-east-1"
+                }
+              },
+              "newrelic": {
+                "trusted-account-key": "3080127",
+                "prd": {
+                  "account-id": "3958264"
+                }
+              }
+            },
+            "bucketSuffix": "33g4b",
+            "sonarOrganization": "gboticario",
+            "github": {
+              "apiUrl": "https://api.github.com",
+              "orgName": "gbhackathon",
+              "orgUrl": "https://github.com/gbhackathon",
+              "repoName": "hack-hackathon-auditoria-back",
+              "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+            },
+            "lifecycle": "experimental",
+            "argocdAppSelector": "auditoria-back",
+            "newRelicEntityName": "auditoria-back",
+            "configs": [
+              {
+                "name": "LOG_LEVEL_ENABLED",
+                "value": "error"
+              }
+            ]
           }
         }
       ],
       "parameters": {
-        "name": "pdd-template-javascript-serverless",
-        "description": "Creates an aws lambda"
+        "services": [
+          {
+            "rdsInstanceClassMySQL": "db.t4g.micro",
+            "service": "rds",
+            "rdsInstanceName": "auditoria-atendimento",
+            "rdsDbName": "audit",
+            "rdsEngine": "mysql",
+            "rdsEngineVersionMySQL": "8.0.28"
+          }
+        ],
+        "githubUser": {
+          "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+          "displayName": "ribeirocostar",
+          "email": "ribeirocostar@users.noreply.github.com"
+        },
+        "repositoryName": "hack-hackathon-auditoria-back",
+        "domain": "hackathon",
+        "system": "hackathon",
+        "team": "auditoriaatendimento",
+        "component": "auditoria-back",
+        "componentDescription": "Back do sistema de auditoria",
+        "domainInfo": {
+          "name": "hackathon",
+          "acronym": "hack",
+          "description": "Hackathon 2023",
+          "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+          "github": {
+            "team": "hackathon",
+            "devops-team": "devops-pdd",
+            "runner-group": "vs-hackathon"
+          },
+          "argocd": {
+            "url": "https://argocd.hack.gb.tech"
+          },
+          "crossplane": {
+            "dev": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "hml": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "prd": {
+              "awsProviderVersion": "v0.26.1"
+            }
+          },
+          "helm-charts": {
+            "gb-app": {
+              "prd": {
+                "revision": "gb-app-0.2.12"
+              }
+            },
+            "gb-infra": {
+              "dev": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "hml": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "prd": {
+                "revision": "gb-infra-0.1.108"
+              }
+            }
+          },
+          "aws": {
+            "prd": {
+              "account-id": "434058138405",
+              "default-region": "us-east-1",
+              "eks": {
+                "clusters": {
+                  "default": {
+                    "name": "eks-hackathon-prd",
+                    "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                  }
+                }
+              },
+              "cloudfront": {
+                "oai": "E3NB7GREJS5UQ1"
+              },
+              "security-groups": {
+                "rds-instance-mysql": "sg-0413b0755b3411aea",
+                "rds-instance-postgres": "sg-0413b0755b3411aea",
+                "lambda-internal": "sg-0254e55e977f8cbe2"
+              },
+              "subnets": {
+                "private": {
+                  "subnet-1": "subnet-07003e61aa538b0d3",
+                  "subnet-2": "subnet-08b21520f5213826f"
+                }
+              }
+            },
+            "shr": {
+              "account-id": "649511289351",
+              "default-region": "us-east-1"
+            }
+          },
+          "newrelic": {
+            "trusted-account-key": "3080127",
+            "prd": {
+              "account-id": "3958264"
+            }
+          }
+        },
+        "bucketSuffix": "33g4b",
+        "sonarOrganization": "gboticario",
+        "github": {
+          "apiUrl": "https://api.github.com",
+          "orgName": "gbhackathon",
+          "orgUrl": "https://github.com/gbhackathon",
+          "repoName": "hack-hackathon-auditoria-back",
+          "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+        },
+        "lifecycle": "experimental",
+        "argocdAppSelector": "auditoria-back",
+        "newRelicEntityName": "auditoria-back",
+        "configs": [
+          {
+            "name": "LOG_LEVEL_ENABLED",
+            "value": "error"
+          }
+        ]
       }
+    },
+    {
+      "name": "pdd-template-github",
+      "version": "0.0.1",
+      "source": {
+        "name": "github",
+        "key": "https://github.com/gbhackathon/pdd-template-github",
+        "options": {
+          "baseUrl": "https://github.com",
+          "baseUrlApi": "https://api.github.com"
+        }
+      },
+      "parameters": {
+        "domain": "hackathon",
+        "component": "auditoria-back",
+        "system": "hackathon",
+        "team": "auditoriaatendimento",
+        "componentDescription": "Back do sistema de auditoria",
+        "services": [
+          {
+            "rdsInstanceClassMySQL": "db.t4g.micro",
+            "service": "rds",
+            "rdsInstanceName": "auditoria-atendimento",
+            "rdsDbName": "audit",
+            "rdsEngine": "mysql",
+            "rdsEngineVersionMySQL": "8.0.28"
+          }
+        ],
+        "githubUser": {
+          "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+          "displayName": "ribeirocostar",
+          "email": "ribeirocostar@users.noreply.github.com"
+        },
+        "repositoryName": "hack-hackathon-auditoria-back",
+        "domainInfo": {
+          "name": "hackathon",
+          "acronym": "hack",
+          "description": "Hackathon 2023",
+          "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+          "github": {
+            "team": "hackathon",
+            "devops-team": "devops-pdd",
+            "runner-group": "vs-hackathon"
+          },
+          "argocd": {
+            "url": "https://argocd.hack.gb.tech"
+          },
+          "crossplane": {
+            "dev": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "hml": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "prd": {
+              "awsProviderVersion": "v0.26.1"
+            }
+          },
+          "helm-charts": {
+            "gb-app": {
+              "prd": {
+                "revision": "gb-app-0.2.12"
+              }
+            },
+            "gb-infra": {
+              "dev": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "hml": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "prd": {
+                "revision": "gb-infra-0.1.108"
+              }
+            }
+          },
+          "aws": {
+            "prd": {
+              "account-id": "434058138405",
+              "default-region": "us-east-1",
+              "eks": {
+                "clusters": {
+                  "default": {
+                    "name": "eks-hackathon-prd",
+                    "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                  }
+                }
+              },
+              "cloudfront": {
+                "oai": "E3NB7GREJS5UQ1"
+              },
+              "security-groups": {
+                "rds-instance-mysql": "sg-0413b0755b3411aea",
+                "rds-instance-postgres": "sg-0413b0755b3411aea",
+                "lambda-internal": "sg-0254e55e977f8cbe2"
+              },
+              "subnets": {
+                "private": {
+                  "subnet-1": "subnet-07003e61aa538b0d3",
+                  "subnet-2": "subnet-08b21520f5213826f"
+                }
+              }
+            },
+            "shr": {
+              "account-id": "649511289351",
+              "default-region": "us-east-1"
+            }
+          },
+          "newrelic": {
+            "trusted-account-key": "3080127",
+            "prd": {
+              "account-id": "3958264"
+            }
+          }
+        },
+        "bucketSuffix": "33g4b",
+        "sonarOrganization": "gboticario",
+        "github": {
+          "apiUrl": "https://api.github.com",
+          "orgName": "gbhackathon",
+          "orgUrl": "https://github.com/gbhackathon",
+          "repoName": "hack-hackathon-auditoria-back",
+          "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+        },
+        "lifecycle": "experimental",
+        "argocdAppSelector": "auditoria-back",
+        "newRelicEntityName": "auditoria-back",
+        "configs": [
+          {
+            "name": "LOG_LEVEL_ENABLED",
+            "value": "error"
+          }
+        ]
+      }
+    },
+    {
+      "name": "pdd-template-backstage",
+      "version": "1.0.0",
+      "source": {
+        "name": "github",
+        "key": "https://github.com/gbhackathon/pdd-template-backstage",
+        "options": {
+          "baseUrl": "https://github.com",
+          "baseUrlApi": "https://api.github.com"
+        }
+      },
+      "partials": [
+        {
+          "name": "catalog:configure",
+          "parameters": {
+            "domain": "hackathon",
+            "component": "auditoria-back",
+            "system": "hackathon",
+            "team": "auditoriaatendimento",
+            "componentDescription": "Back do sistema de auditoria",
+            "services": [
+              {
+                "rdsInstanceClassMySQL": "db.t4g.micro",
+                "service": "rds",
+                "rdsInstanceName": "auditoria-atendimento",
+                "rdsDbName": "audit",
+                "rdsEngine": "mysql",
+                "rdsEngineVersionMySQL": "8.0.28"
+              }
+            ],
+            "githubUser": {
+              "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+              "displayName": "ribeirocostar",
+              "email": "ribeirocostar@users.noreply.github.com"
+            },
+            "repositoryName": "hack-hackathon-auditoria-back",
+            "domainInfo": {
+              "name": "hackathon",
+              "acronym": "hack",
+              "description": "Hackathon 2023",
+              "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+              "github": {
+                "team": "hackathon",
+                "devops-team": "devops-pdd",
+                "runner-group": "vs-hackathon"
+              },
+              "argocd": {
+                "url": "https://argocd.hack.gb.tech"
+              },
+              "crossplane": {
+                "dev": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "hml": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "prd": {
+                  "awsProviderVersion": "v0.26.1"
+                }
+              },
+              "helm-charts": {
+                "gb-app": {
+                  "prd": {
+                    "revision": "gb-app-0.2.12"
+                  }
+                },
+                "gb-infra": {
+                  "dev": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "hml": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "prd": {
+                    "revision": "gb-infra-0.1.108"
+                  }
+                }
+              },
+              "aws": {
+                "prd": {
+                  "account-id": "434058138405",
+                  "default-region": "us-east-1",
+                  "eks": {
+                    "clusters": {
+                      "default": {
+                        "name": "eks-hackathon-prd",
+                        "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                      }
+                    }
+                  },
+                  "cloudfront": {
+                    "oai": "E3NB7GREJS5UQ1"
+                  },
+                  "security-groups": {
+                    "rds-instance-mysql": "sg-0413b0755b3411aea",
+                    "rds-instance-postgres": "sg-0413b0755b3411aea",
+                    "lambda-internal": "sg-0254e55e977f8cbe2"
+                  },
+                  "subnets": {
+                    "private": {
+                      "subnet-1": "subnet-07003e61aa538b0d3",
+                      "subnet-2": "subnet-08b21520f5213826f"
+                    }
+                  }
+                },
+                "shr": {
+                  "account-id": "649511289351",
+                  "default-region": "us-east-1"
+                }
+              },
+              "newrelic": {
+                "trusted-account-key": "3080127",
+                "prd": {
+                  "account-id": "3958264"
+                }
+              }
+            },
+            "bucketSuffix": "33g4b",
+            "sonarOrganization": "gboticario",
+            "github": {
+              "apiUrl": "https://api.github.com",
+              "orgName": "gbhackathon",
+              "orgUrl": "https://github.com/gbhackathon",
+              "repoName": "hack-hackathon-auditoria-back",
+              "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+            },
+            "lifecycle": "experimental",
+            "argocdAppSelector": "auditoria-back",
+            "newRelicEntityName": "auditoria-back",
+            "configs": [
+              {
+                "name": "LOG_LEVEL_ENABLED",
+                "value": "error"
+              }
+            ],
+            "sonar": {
+              "language": "js",
+              "organization": "gboticario",
+              "projectBaseDir": "src",
+              "projectVersion": "0.0.1",
+              "sourceEncoding": "UTF-8",
+              "test": {
+                "inclusions": "test/**"
+              },
+              "exclusions": "resources/**,test/**,jest.config.js",
+              "javascript": {
+                "lcov": {
+                  "reportPaths": "coverage/lcov.info"
+                }
+              },
+              "coverage": {
+                "exclusions": "**tests**,**mocks**,**fake**,**settings**,**server**,**jest.config.js,**monitor**,src/log.js,src/secrets.js"
+              }
+            },
+            "resources": {
+              "cpu": "80m",
+              "memory": "80Mi"
+            }
+          }
+        }
+      ],
+      "parameters": {
+        "domain": "hackathon",
+        "component": "auditoria-back",
+        "system": "hackathon",
+        "team": "auditoriaatendimento",
+        "componentDescription": "Back do sistema de auditoria",
+        "services": [
+          {
+            "rdsInstanceClassMySQL": "db.t4g.micro",
+            "service": "rds",
+            "rdsInstanceName": "auditoria-atendimento",
+            "rdsDbName": "audit",
+            "rdsEngine": "mysql",
+            "rdsEngineVersionMySQL": "8.0.28"
+          }
+        ],
+        "githubUser": {
+          "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+          "displayName": "ribeirocostar",
+          "email": "ribeirocostar@users.noreply.github.com"
+        },
+        "repositoryName": "hack-hackathon-auditoria-back",
+        "domainInfo": {
+          "name": "hackathon",
+          "acronym": "hack",
+          "description": "Hackathon 2023",
+          "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+          "github": {
+            "team": "hackathon",
+            "devops-team": "devops-pdd",
+            "runner-group": "vs-hackathon"
+          },
+          "argocd": {
+            "url": "https://argocd.hack.gb.tech"
+          },
+          "crossplane": {
+            "dev": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "hml": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "prd": {
+              "awsProviderVersion": "v0.26.1"
+            }
+          },
+          "helm-charts": {
+            "gb-app": {
+              "prd": {
+                "revision": "gb-app-0.2.12"
+              }
+            },
+            "gb-infra": {
+              "dev": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "hml": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "prd": {
+                "revision": "gb-infra-0.1.108"
+              }
+            }
+          },
+          "aws": {
+            "prd": {
+              "account-id": "434058138405",
+              "default-region": "us-east-1",
+              "eks": {
+                "clusters": {
+                  "default": {
+                    "name": "eks-hackathon-prd",
+                    "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                  }
+                }
+              },
+              "cloudfront": {
+                "oai": "E3NB7GREJS5UQ1"
+              },
+              "security-groups": {
+                "rds-instance-mysql": "sg-0413b0755b3411aea",
+                "rds-instance-postgres": "sg-0413b0755b3411aea",
+                "lambda-internal": "sg-0254e55e977f8cbe2"
+              },
+              "subnets": {
+                "private": {
+                  "subnet-1": "subnet-07003e61aa538b0d3",
+                  "subnet-2": "subnet-08b21520f5213826f"
+                }
+              }
+            },
+            "shr": {
+              "account-id": "649511289351",
+              "default-region": "us-east-1"
+            }
+          },
+          "newrelic": {
+            "trusted-account-key": "3080127",
+            "prd": {
+              "account-id": "3958264"
+            }
+          }
+        },
+        "bucketSuffix": "33g4b",
+        "sonarOrganization": "gboticario",
+        "github": {
+          "apiUrl": "https://api.github.com",
+          "orgName": "gbhackathon",
+          "orgUrl": "https://github.com/gbhackathon",
+          "repoName": "hack-hackathon-auditoria-back",
+          "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+        },
+        "lifecycle": "experimental",
+        "argocdAppSelector": "auditoria-back",
+        "newRelicEntityName": "auditoria-back",
+        "configs": [
+          {
+            "name": "LOG_LEVEL_ENABLED",
+            "value": "error"
+          }
+        ],
+        "sonar": {
+          "language": "js",
+          "organization": "gboticario",
+          "projectBaseDir": "src",
+          "projectVersion": "0.0.1",
+          "sourceEncoding": "UTF-8",
+          "test": {
+            "inclusions": "test/**"
+          },
+          "exclusions": "resources/**,test/**,jest.config.js",
+          "javascript": {
+            "lcov": {
+              "reportPaths": "coverage/lcov.info"
+            }
+          },
+          "coverage": {
+            "exclusions": "**tests**,**mocks**,**fake**,**settings**,**server**,**jest.config.js,**monitor**,src/log.js,src/secrets.js"
+          }
+        },
+        "resources": {
+          "cpu": "80m",
+          "memory": "80Mi"
+        }
+      }
+    },
+    {
+      "name": "pdd-template-crossplane-aws",
+      "version": "1.0.0",
+      "source": {
+        "name": "github",
+        "key": "https://github.com/gbhackathon/pdd-template-crossplane-aws",
+        "options": {
+          "baseUrl": "https://github.com",
+          "baseUrlApi": "https://api.github.com"
+        }
+      },
+      "partials": [
+        {
+          "name": "secrets",
+          "parameters": {
+            "domain": "hackathon",
+            "component": "auditoria-back",
+            "system": "hackathon",
+            "team": "auditoriaatendimento",
+            "componentDescription": "Back do sistema de auditoria",
+            "services": [
+              {
+                "rdsInstanceClassMySQL": "db.t4g.micro",
+                "service": "rds",
+                "rdsInstanceName": "auditoria-atendimento",
+                "rdsDbName": "audit",
+                "rdsEngine": "mysql",
+                "rdsEngineVersionMySQL": "8.0.28"
+              }
+            ],
+            "githubUser": {
+              "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+              "displayName": "ribeirocostar",
+              "email": "ribeirocostar@users.noreply.github.com"
+            },
+            "repositoryName": "hack-hackathon-auditoria-back",
+            "domainInfo": {
+              "name": "hackathon",
+              "acronym": "hack",
+              "description": "Hackathon 2023",
+              "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+              "github": {
+                "team": "hackathon",
+                "devops-team": "devops-pdd",
+                "runner-group": "vs-hackathon"
+              },
+              "argocd": {
+                "url": "https://argocd.hack.gb.tech"
+              },
+              "crossplane": {
+                "dev": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "hml": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "prd": {
+                  "awsProviderVersion": "v0.26.1"
+                }
+              },
+              "helm-charts": {
+                "gb-app": {
+                  "prd": {
+                    "revision": "gb-app-0.2.12"
+                  }
+                },
+                "gb-infra": {
+                  "dev": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "hml": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "prd": {
+                    "revision": "gb-infra-0.1.108"
+                  }
+                }
+              },
+              "aws": {
+                "prd": {
+                  "account-id": "434058138405",
+                  "default-region": "us-east-1",
+                  "eks": {
+                    "clusters": {
+                      "default": {
+                        "name": "eks-hackathon-prd",
+                        "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                      }
+                    }
+                  },
+                  "cloudfront": {
+                    "oai": "E3NB7GREJS5UQ1"
+                  },
+                  "security-groups": {
+                    "rds-instance-mysql": "sg-0413b0755b3411aea",
+                    "rds-instance-postgres": "sg-0413b0755b3411aea",
+                    "lambda-internal": "sg-0254e55e977f8cbe2"
+                  },
+                  "subnets": {
+                    "private": {
+                      "subnet-1": "subnet-07003e61aa538b0d3",
+                      "subnet-2": "subnet-08b21520f5213826f"
+                    }
+                  }
+                },
+                "shr": {
+                  "account-id": "649511289351",
+                  "default-region": "us-east-1"
+                }
+              },
+              "newrelic": {
+                "trusted-account-key": "3080127",
+                "prd": {
+                  "account-id": "3958264"
+                }
+              }
+            },
+            "bucketSuffix": "33g4b",
+            "sonarOrganization": "gboticario",
+            "github": {
+              "apiUrl": "https://api.github.com",
+              "orgName": "gbhackathon",
+              "orgUrl": "https://github.com/gbhackathon",
+              "repoName": "hack-hackathon-auditoria-back",
+              "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+            },
+            "lifecycle": "experimental",
+            "argocdAppSelector": "auditoria-back",
+            "newRelicEntityName": "auditoria-back",
+            "configs": [
+              {
+                "name": "LOG_LEVEL_ENABLED",
+                "value": "error"
+              }
+            ]
+          }
+        },
+        {
+          "name": "parameter-store",
+          "parameters": {
+            "domain": "hackathon",
+            "component": "auditoria-back",
+            "system": "hackathon",
+            "team": "auditoriaatendimento",
+            "componentDescription": "Back do sistema de auditoria",
+            "services": [
+              {
+                "rdsInstanceClassMySQL": "db.t4g.micro",
+                "service": "rds",
+                "rdsInstanceName": "auditoria-atendimento",
+                "rdsDbName": "audit",
+                "rdsEngine": "mysql",
+                "rdsEngineVersionMySQL": "8.0.28"
+              }
+            ],
+            "githubUser": {
+              "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+              "displayName": "ribeirocostar",
+              "email": "ribeirocostar@users.noreply.github.com"
+            },
+            "repositoryName": "hack-hackathon-auditoria-back",
+            "domainInfo": {
+              "name": "hackathon",
+              "acronym": "hack",
+              "description": "Hackathon 2023",
+              "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+              "github": {
+                "team": "hackathon",
+                "devops-team": "devops-pdd",
+                "runner-group": "vs-hackathon"
+              },
+              "argocd": {
+                "url": "https://argocd.hack.gb.tech"
+              },
+              "crossplane": {
+                "dev": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "hml": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "prd": {
+                  "awsProviderVersion": "v0.26.1"
+                }
+              },
+              "helm-charts": {
+                "gb-app": {
+                  "prd": {
+                    "revision": "gb-app-0.2.12"
+                  }
+                },
+                "gb-infra": {
+                  "dev": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "hml": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "prd": {
+                    "revision": "gb-infra-0.1.108"
+                  }
+                }
+              },
+              "aws": {
+                "prd": {
+                  "account-id": "434058138405",
+                  "default-region": "us-east-1",
+                  "eks": {
+                    "clusters": {
+                      "default": {
+                        "name": "eks-hackathon-prd",
+                        "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                      }
+                    }
+                  },
+                  "cloudfront": {
+                    "oai": "E3NB7GREJS5UQ1"
+                  },
+                  "security-groups": {
+                    "rds-instance-mysql": "sg-0413b0755b3411aea",
+                    "rds-instance-postgres": "sg-0413b0755b3411aea",
+                    "lambda-internal": "sg-0254e55e977f8cbe2"
+                  },
+                  "subnets": {
+                    "private": {
+                      "subnet-1": "subnet-07003e61aa538b0d3",
+                      "subnet-2": "subnet-08b21520f5213826f"
+                    }
+                  }
+                },
+                "shr": {
+                  "account-id": "649511289351",
+                  "default-region": "us-east-1"
+                }
+              },
+              "newrelic": {
+                "trusted-account-key": "3080127",
+                "prd": {
+                  "account-id": "3958264"
+                }
+              }
+            },
+            "bucketSuffix": "33g4b",
+            "sonarOrganization": "gboticario",
+            "github": {
+              "apiUrl": "https://api.github.com",
+              "orgName": "gbhackathon",
+              "orgUrl": "https://github.com/gbhackathon",
+              "repoName": "hack-hackathon-auditoria-back",
+              "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+            },
+            "lifecycle": "experimental",
+            "argocdAppSelector": "auditoria-back",
+            "newRelicEntityName": "auditoria-back",
+            "configs": [
+              {
+                "name": "LOG_LEVEL_ENABLED",
+                "value": "error"
+              }
+            ]
+          }
+        },
+        {
+          "name": "sls-role",
+          "parameters": {
+            "domain": "hackathon",
+            "component": "auditoria-back",
+            "system": "hackathon",
+            "team": "auditoriaatendimento",
+            "componentDescription": "Back do sistema de auditoria",
+            "services": [
+              {
+                "rdsInstanceClassMySQL": "db.t4g.micro",
+                "service": "rds",
+                "rdsInstanceName": "auditoria-atendimento",
+                "rdsDbName": "audit",
+                "rdsEngine": "mysql",
+                "rdsEngineVersionMySQL": "8.0.28"
+              }
+            ],
+            "githubUser": {
+              "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+              "displayName": "ribeirocostar",
+              "email": "ribeirocostar@users.noreply.github.com"
+            },
+            "repositoryName": "hack-hackathon-auditoria-back",
+            "domainInfo": {
+              "name": "hackathon",
+              "acronym": "hack",
+              "description": "Hackathon 2023",
+              "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+              "github": {
+                "team": "hackathon",
+                "devops-team": "devops-pdd",
+                "runner-group": "vs-hackathon"
+              },
+              "argocd": {
+                "url": "https://argocd.hack.gb.tech"
+              },
+              "crossplane": {
+                "dev": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "hml": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "prd": {
+                  "awsProviderVersion": "v0.26.1"
+                }
+              },
+              "helm-charts": {
+                "gb-app": {
+                  "prd": {
+                    "revision": "gb-app-0.2.12"
+                  }
+                },
+                "gb-infra": {
+                  "dev": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "hml": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "prd": {
+                    "revision": "gb-infra-0.1.108"
+                  }
+                }
+              },
+              "aws": {
+                "prd": {
+                  "account-id": "434058138405",
+                  "default-region": "us-east-1",
+                  "eks": {
+                    "clusters": {
+                      "default": {
+                        "name": "eks-hackathon-prd",
+                        "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                      }
+                    }
+                  },
+                  "cloudfront": {
+                    "oai": "E3NB7GREJS5UQ1"
+                  },
+                  "security-groups": {
+                    "rds-instance-mysql": "sg-0413b0755b3411aea",
+                    "rds-instance-postgres": "sg-0413b0755b3411aea",
+                    "lambda-internal": "sg-0254e55e977f8cbe2"
+                  },
+                  "subnets": {
+                    "private": {
+                      "subnet-1": "subnet-07003e61aa538b0d3",
+                      "subnet-2": "subnet-08b21520f5213826f"
+                    }
+                  }
+                },
+                "shr": {
+                  "account-id": "649511289351",
+                  "default-region": "us-east-1"
+                }
+              },
+              "newrelic": {
+                "trusted-account-key": "3080127",
+                "prd": {
+                  "account-id": "3958264"
+                }
+              }
+            },
+            "bucketSuffix": "33g4b",
+            "sonarOrganization": "gboticario",
+            "github": {
+              "apiUrl": "https://api.github.com",
+              "orgName": "gbhackathon",
+              "orgUrl": "https://github.com/gbhackathon",
+              "repoName": "hack-hackathon-auditoria-back",
+              "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+            },
+            "lifecycle": "experimental",
+            "argocdAppSelector": "auditoria-back",
+            "newRelicEntityName": "auditoria-back",
+            "configs": [
+              {
+                "name": "LOG_LEVEL_ENABLED",
+                "value": "error"
+              }
+            ]
+          }
+        },
+        {
+          "name": "rds",
+          "parameters": {
+            "domain": "hackathon",
+            "component": "auditoria-back",
+            "system": "hackathon",
+            "team": "auditoriaatendimento",
+            "componentDescription": "Back do sistema de auditoria",
+            "services": [
+              {
+                "rdsInstanceClassMySQL": "db.t4g.micro",
+                "service": "rds",
+                "rdsInstanceName": "auditoria-atendimento",
+                "rdsDbName": "audit",
+                "rdsEngine": "mysql",
+                "rdsEngineVersionMySQL": "8.0.28"
+              }
+            ],
+            "githubUser": {
+              "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+              "displayName": "ribeirocostar",
+              "email": "ribeirocostar@users.noreply.github.com"
+            },
+            "repositoryName": "hack-hackathon-auditoria-back",
+            "domainInfo": {
+              "name": "hackathon",
+              "acronym": "hack",
+              "description": "Hackathon 2023",
+              "backstage": {},
+              "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+              "github": {
+                "team": "hackathon",
+                "devops-team": "devops-pdd",
+                "runner-group": "vs-hackathon"
+              },
+              "argocd": {
+                "url": "https://argocd.hack.gb.tech"
+              },
+              "crossplane": {
+                "dev": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "hml": {
+                  "awsProviderVersion": "v0.26.1"
+                },
+                "prd": {
+                  "awsProviderVersion": "v0.26.1"
+                }
+              },
+              "helm-charts": {
+                "gb-app": {
+                  "prd": {
+                    "revision": "gb-app-0.2.12"
+                  }
+                },
+                "gb-infra": {
+                  "dev": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "hml": {
+                    "revision": "gb-infra-0.1.109"
+                  },
+                  "prd": {
+                    "revision": "gb-infra-0.1.108"
+                  }
+                }
+              },
+              "aws": {
+                "prd": {
+                  "account-id": "434058138405",
+                  "default-region": "us-east-1",
+                  "waf": {},
+                  "eks": {
+                    "clusters": {
+                      "default": {
+                        "name": "eks-hackathon-prd",
+                        "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                      }
+                    }
+                  },
+                  "cloudfront": {
+                    "oai": "E3NB7GREJS5UQ1"
+                  },
+                  "security-groups": {
+                    "rds-instance-mysql": "sg-0413b0755b3411aea",
+                    "rds-instance-postgres": "sg-0413b0755b3411aea",
+                    "lambda-internal": "sg-0254e55e977f8cbe2"
+                  },
+                  "subnets": {
+                    "private": {
+                      "subnet-1": "subnet-07003e61aa538b0d3",
+                      "subnet-2": "subnet-08b21520f5213826f"
+                    }
+                  }
+                },
+                "shr": {
+                  "account-id": "649511289351",
+                  "default-region": "us-east-1"
+                }
+              },
+              "newrelic": {
+                "trusted-account-key": "3080127",
+                "prd": {
+                  "account-id": "3958264"
+                },
+                "shr": {}
+              }
+            },
+            "bucketSuffix": "33g4b",
+            "sonarOrganization": "gboticario",
+            "github": {
+              "apiUrl": "https://api.github.com",
+              "orgName": "gbhackathon",
+              "orgUrl": "https://github.com/gbhackathon",
+              "repoName": "hack-hackathon-auditoria-back",
+              "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+            },
+            "lifecycle": "experimental",
+            "argocdAppSelector": "auditoria-back",
+            "newRelicEntityName": "auditoria-back",
+            "configs": [
+              {
+                "name": "LOG_LEVEL_ENABLED",
+                "value": "error"
+              }
+            ],
+            "rdsInstanceClassMySQL": "db.t4g.micro",
+            "service": "rds",
+            "rdsInstanceName": "auditoria-atendimento",
+            "rdsDbName": "audit",
+            "rdsEngine": "mysql",
+            "rdsEngineVersionMySQL": "8.0.28",
+            "rdsDbParameterGroupFamily": "mysql8.0",
+            "rdsEngineVersion": "8.0.28",
+            "rdsInstanceClass": "db.t4g.micro",
+            "rdsSecurityGroupPrd": "sg-0413b0755b3411aea"
+          }
+        }
+      ],
+      "parameters": {
+        "domain": "hackathon",
+        "component": "auditoria-back",
+        "system": "hackathon",
+        "team": "auditoriaatendimento",
+        "componentDescription": "Back do sistema de auditoria",
+        "services": [
+          {
+            "rdsInstanceClassMySQL": "db.t4g.micro",
+            "service": "rds",
+            "rdsInstanceName": "auditoria-atendimento",
+            "rdsDbName": "audit",
+            "rdsEngine": "mysql",
+            "rdsEngineVersionMySQL": "8.0.28"
+          }
+        ],
+        "githubUser": {
+          "picture": "https://avatars.githubusercontent.com/u/42178020?v=4",
+          "displayName": "ribeirocostar",
+          "email": "ribeirocostar@users.noreply.github.com"
+        },
+        "repositoryName": "hack-hackathon-auditoria-back",
+        "domainInfo": {
+          "name": "hackathon",
+          "acronym": "hack",
+          "description": "Hackathon 2023",
+          "serverlessBackendHostedZoneId": "Z02306572PP0KNXN5OM4V",
+          "github": {
+            "team": "hackathon",
+            "devops-team": "devops-pdd",
+            "runner-group": "vs-hackathon"
+          },
+          "argocd": {
+            "url": "https://argocd.hack.gb.tech"
+          },
+          "crossplane": {
+            "dev": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "hml": {
+              "awsProviderVersion": "v0.26.1"
+            },
+            "prd": {
+              "awsProviderVersion": "v0.26.1"
+            }
+          },
+          "helm-charts": {
+            "gb-app": {
+              "prd": {
+                "revision": "gb-app-0.2.12"
+              }
+            },
+            "gb-infra": {
+              "dev": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "hml": {
+                "revision": "gb-infra-0.1.109"
+              },
+              "prd": {
+                "revision": "gb-infra-0.1.108"
+              }
+            }
+          },
+          "aws": {
+            "prd": {
+              "account-id": "434058138405",
+              "default-region": "us-east-1",
+              "eks": {
+                "clusters": {
+                  "default": {
+                    "name": "eks-hackathon-prd",
+                    "oidc": "9F7E993031B56CFA126B5BB7EAB575C1"
+                  }
+                }
+              },
+              "cloudfront": {
+                "oai": "E3NB7GREJS5UQ1"
+              },
+              "security-groups": {
+                "rds-instance-mysql": "sg-0413b0755b3411aea",
+                "rds-instance-postgres": "sg-0413b0755b3411aea",
+                "lambda-internal": "sg-0254e55e977f8cbe2"
+              },
+              "subnets": {
+                "private": {
+                  "subnet-1": "subnet-07003e61aa538b0d3",
+                  "subnet-2": "subnet-08b21520f5213826f"
+                }
+              }
+            },
+            "shr": {
+              "account-id": "649511289351",
+              "default-region": "us-east-1"
+            }
+          },
+          "newrelic": {
+            "trusted-account-key": "3080127",
+            "prd": {
+              "account-id": "3958264"
+            }
+          }
+        },
+        "bucketSuffix": "33g4b",
+        "sonarOrganization": "gboticario",
+        "github": {
+          "apiUrl": "https://api.github.com",
+          "orgName": "gbhackathon",
+          "orgUrl": "https://github.com/gbhackathon",
+          "repoName": "hack-hackathon-auditoria-back",
+          "repoUrl": "https://github.com/gbhackathon/hack-hackathon-auditoria-back"
+        },
+        "lifecycle": "experimental",
+        "argocdAppSelector": "auditoria-back",
+        "newRelicEntityName": "auditoria-back",
+        "configs": [
+          {
+            "name": "LOG_LEVEL_ENABLED",
+            "value": "error"
+          }
+        ]
+      }
+    }
+  ],
+  "globalParameters": [
+    {
+      "name": "domain",
+      "value": "hackathon"
+    },
+    {
+      "name": "component",
+      "value": "auditoria-back"
+    },
+    {
+      "name": "system",
+      "value": "hackathon"
+    },
+    {
+      "name": "team",
+      "value": "auditoriaatendimento"
+    },
+    {
+      "name": "componentDescription",
+      "value": "Back do sistema de auditoria"
     }
   ]
 }
