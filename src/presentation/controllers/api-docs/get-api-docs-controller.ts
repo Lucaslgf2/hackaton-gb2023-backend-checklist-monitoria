@@ -24,7 +24,7 @@ export class GetApiDocsController implements IController {
           <script>
             SwaggerUIBundle({
               dom_id: '#swagger',
-              url: '${this.environment === 'local' ? 'http://localhost:3000/local/swagger.json' : 'https://auditoria-back.prd.hackathon.grupoboticario.digital'}'
+              url: '${this.environment === 'local' ? 'http://localhost:3000/local/swagger.json' : 'https://auditoria-back.prd.hackathon.grupoboticario.digital/swagger.json'}'
           });
           </script>
       </body>

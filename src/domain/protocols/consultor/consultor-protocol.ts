@@ -2,13 +2,13 @@ export namespace NsConsultor {
   export type Input = null
 
   export type Output = Array<{
-    CodigoConsultor: number
-    Nome: string
-    Email: string
-    TempoCasa: string
-    VS: string
-    CelulaAtendimento: string
-    Supervisor: string
+    consultorId: number
+    nomeConsultor: string
+    email: string
+    tempoCasa: string
+    vs: string
+    celulaAtendimento: string
+    supervisor: string
   }> | undefined
 }
 

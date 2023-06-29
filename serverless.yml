@@ -144,20 +144,6 @@ functions:
           path: /swagger.json
           method: get
 
-  rotaTesteAuditoriaAtendimento:
-    enabled: true
-    disableLogs: true
-    architecture: ${self:provider.architecture}
-    handler: 'src/main/routes/rota-teste-auditoria-atendimento-route.getRotaTesteAuditoriaAtendimentoHandler'
-    events:
-      - http:
-          path: /rota-teste-auditoria-atendimento
-          method: get
-          cors:
-            origin: '*'
-            headers: '*'
-          private: true
-
   consultor:
     enabled: true
     disableLogs: true
@@ -165,7 +151,7 @@ functions:
     handler: 'src/main/routes/consultor-route.getConsultorHandler'
     events:
       - http:
-          path: /consultor
+          path: /consultor/{consultorId}
           method: get
           cors:
             origin: '*'
@@ -179,7 +165,21 @@ functions:
     handler: 'src/main/routes/auditoria-route.getAuditoriaHandler'
     events:
       - http:
-          path: /auditoria
+          path: /auditoria/{auditoriaId}
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+  monitor:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/monitor-route.getMonitorHandler'
+    events:
+      - http:
+          path: /monitor
           method: get
           cors:
             origin: '*'
@@ -187,5 +187,4 @@ functions:
           private: true
 
 # PLOP_REPLACE
-
 

@@ -14,7 +14,8 @@ export abstract class TypeORMConnection {
       password: envVariables.mySql.password,
       database: envVariables.mySql.database,
       multipleStatements: true,
-      logging: true
+      logging: true,
+      cache: true
     })
   }
 
@@ -27,7 +28,6 @@ export abstract class TypeORMConnection {
   protected async executeQuery (querySql: string, params?: any[]): Promise<any[]> {
     await this.connect()
     const rows = await this.appDataSource.query(querySql, params)
-    // const [rows] = await this.appDataSource.query(querySql, params)
     return rows
   }
 }

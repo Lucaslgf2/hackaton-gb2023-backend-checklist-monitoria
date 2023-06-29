@@ -1,12 +1,12 @@
-import { IFindRotaTesteAuditoriaAtendimento } from '@/domain/protocols/rota-teste-auditoria-atendimento/rota-teste-auditoria-atendimento-protocol'
+import { IFindMonitor } from '@/domain/protocols/monitor/monitor-protocol'
 import ErrorHandler from '@/presentation/http/error-handler'
 import { badRequest, notFound, ok } from '@/presentation/http/http-status'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '@/presentation/protocols'
 
-export class GetRotaTesteAuditoriaAtendimentoController implements IController {
+export class GetMonitorController implements IController {
   constructor (
     private readonly validation: IValidation,
-    private readonly findRotaTesteAuditoriaAtendimento: IFindRotaTesteAuditoriaAtendimento
+    private readonly findMonitor: IFindMonitor
   ) {}
 
   @ErrorHandler()
@@ -16,7 +16,7 @@ export class GetRotaTesteAuditoriaAtendimentoController implements IController {
       return badRequest(error)
     }
 
-    const result = await this.findRotaTesteAuditoriaAtendimento.find(null)
+    const result = await this.findMonitor.find(null)
     return result ? ok(result) : notFound()
   }
 }

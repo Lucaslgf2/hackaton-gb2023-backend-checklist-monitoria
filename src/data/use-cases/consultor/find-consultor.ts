@@ -8,6 +8,16 @@ export class FindConsultor implements IFindConsultor {
 
   async find (params: NsConsultor.Input): Promise<NsConsultor.Output> {
     const dbRows = await this.consultorRepo.select(params)
-    return dbRows
+    return dbRows?.map(item => {
+      return {
+        consultorId: item.CodigoConsultor,
+        nomeConsultor: item.Nome,
+        email: item.Email,
+        tempoCasa: item.TempoCasa,
+        vs: item.VS,
+        celulaAtendimento: item.CelulaAtendimento,
+        supervisor: item.Supervisor
+      }
+    })
   }
 }

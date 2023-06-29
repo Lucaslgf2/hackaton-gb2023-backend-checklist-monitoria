@@ -1,7 +1,7 @@
 import { IValidation } from '@/presentation/protocols'
 import { ValidationComposite } from '@/validation/validators/validation-composite'
 
-export const makeGetRotaTesteAuditoriaAtendimentoValidation = (): IValidation => {
+export const makeGetMonitorValidation = (): IValidation => {
   const validations: IValidation[] = []
 
   // validations.push(new RequiredFieldValidation('startCurrentDate'))
