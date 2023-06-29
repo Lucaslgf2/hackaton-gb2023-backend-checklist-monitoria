@@ -118,7 +118,7 @@ functions:
     enabled: true
     disableLogs: true
     architecture: ${self:provider.architecture}
-    handler: 'src/main/routes/default-function-route.getApiDocsHandler'
+    handler: 'src/main/routes/default-function-route.getDefaultFunctionHandler'
     events:
       - http:
           path: /default-function
