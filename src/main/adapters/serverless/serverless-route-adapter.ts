@@ -1,6 +1,6 @@
-import loggerWinston from '@/main/adapters/winston-log/winston-log-adapter'
 import { IController, IHttpRequest, IHttpResponse, IMiddleware } from '@/presentation/protocols'
 import { APIGatewayEvent, APIGatewayTokenAuthorizerEvent, Context } from 'aws-lambda'
+import 'reflect-metadata'
 import { middlewareComposite } from './serverless-route-middleware'
 import { formatServerlessReqParams, formatServerlessResponse } from './serverless-route-utils'
 
@@ -28,7 +28,7 @@ export const adaptServerlessRoute = (controller: IController, middlewares?: IMid
       }
     }
 
-    loggerWinston.info('event/context/httpRequest/httpResponse', { event, context, httpRequest, httpResponse })
+    // loggerWinston.info('event/context/httpRequest/httpResponse', { event, context, httpRequest, httpResponse })
     return formatServerlessResponse(httpResponse)
   }
 }

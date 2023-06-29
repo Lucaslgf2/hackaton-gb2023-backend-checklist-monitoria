@@ -114,20 +114,6 @@ custom:
     useChildProcesses: true
 
 functions:
-  defaultFunction:
-    enabled: true
-    disableLogs: true
-    architecture: ${self:provider.architecture}
-    handler: 'src/main/routes/default-function-route.getDefaultFunctionHandler'
-    events:
-      - http:
-          path: /default-function
-          method: get
-          cors:
-            origin: '*'
-            headers: '*'
-          private: true
-
   envVariables:
     enabled: true
     disableLogs: true
@@ -173,4 +159,3 @@ functions:
           private: true
 
 # PLOP_REPLACE
-

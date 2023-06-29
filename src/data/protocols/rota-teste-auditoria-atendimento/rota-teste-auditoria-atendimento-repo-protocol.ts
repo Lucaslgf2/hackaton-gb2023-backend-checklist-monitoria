@@ -1,7 +1,7 @@
 export namespace NsRotaTesteAuditoriaAtendimentoRepo {
   export type Input = null
 
-  export type Output = [] | undefined
+  export type Output = any | undefined
 }
 
 export interface IRotaTesteAuditoriaAtendimentoRepo {
