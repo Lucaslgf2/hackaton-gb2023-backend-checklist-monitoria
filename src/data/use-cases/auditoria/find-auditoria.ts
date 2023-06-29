@@ -7,7 +7,7 @@ export class FindAuditoria implements IFindAuditoria {
   ) {}
 
   async find (params: NsAuditoria.Input): Promise<NsAuditoria.Output> {
-    const dbRows = await this.auditoriaRepo.select(params)
+    const dbRows = {}// await this.auditoriaRepo.select(params)
     console.log(dbRows)
     return [
       {

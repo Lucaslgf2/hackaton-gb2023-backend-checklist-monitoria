@@ -186,5 +186,20 @@ functions:
             headers: '*'
           private: true
 
+  amostragem:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/amostragem-route.getAmostragemHandler'
+    events:
+      - http:
+          path: /amostragem
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
 # PLOP_REPLACE
+
 
