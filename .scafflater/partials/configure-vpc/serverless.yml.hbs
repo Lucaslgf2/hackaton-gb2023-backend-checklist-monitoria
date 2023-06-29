@@ -1,0 +1,5 @@
+{{!-- @scf-option { "targetName": "serverless.yml" } --}}
+{{!-- @scf-option { "appenders": ["./appenders/yaml-appender"] } --}}
+
+provider:
+  vpc: ${file(./resources/serverless.${self:provider.stage}.yml):provider.vpc}

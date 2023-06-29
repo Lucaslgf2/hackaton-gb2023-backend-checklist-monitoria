@@ -1,0 +1,6 @@
+{
+  "name": "scafflater-template-hooks",
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}

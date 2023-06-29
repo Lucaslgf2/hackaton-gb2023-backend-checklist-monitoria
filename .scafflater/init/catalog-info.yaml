@@ -1,0 +1,6 @@
+# @scf-option { "appenders": ["./appenders/yaml-appender"] }
+
+metadata:
+  tags: ["serverless", "api", "node", "javascript"]
+spec:
+  lifecycle: 'experimental'

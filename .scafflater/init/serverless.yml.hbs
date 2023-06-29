@@ -1,0 +1,49 @@
+{{!-- @scf-option { "targetName": "serverless.yml" } --}}
+{{!-- @scf-option { "appenders": ["./appenders/yaml-appender"] } --}}
+
+service: {{parameters.component}}
+
+provider:
+  stackTags:
+    Product: "{{parameters.system}}"
+    Squad: "{{parameters.team}}"
+  {{#if parameters.enableApiGateway}}
+  apiGateway:
+    apiKeys:
+      - name: ${self:service}-${self:provider.stage}
+        description: api key ${self:service} de ${self:provider.stage}
+    apiKeySourceType: HEADER
+    disableDefaultEndpoint: true
+  logs:
+    restApi:
+      accessLogging: false
+      executionLogging: true
+  tracing:
+    apiGateway: true
+  {{/if}}
+
+{{#if parameters.enableApiGateway}}
+plugins:
+  - serverless-associate-waf
+  - serverless-domain-manager
+
+custom:
+  associateWaf:
+    name: acl-backend
+    version: V2
+  customDomain:
+    enabled: true
+    domainName: ${self:service}.hack.gb.tech
+    stage: ${self:provider.stage}
+    createRoute53Record: false
+    basePath: ""
+
+functions:
+  defaultFunction:
+    events:
+      - http:
+          path: /
+          method: get
+          cors: true
+          private: true
+{{/if}}

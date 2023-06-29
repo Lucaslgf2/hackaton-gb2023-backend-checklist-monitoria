@@ -1,0 +1,17 @@
+# Description: Serverless configuration for dev environment
+
+provider:
+  memorySize: 128
+  timeout: 6
+  vpc:
+    securityGroupIds:
+      - sg-local
+    subnetIds:
+      - subnet-local
+
+environment:
+  AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  NODE_ENV: local
+  NEW_RELIC_EXTENSION_SEND_FUNCTION_LOGS: true
+  NEW_RELIC_LICENSE_KEY: local
+  NEW_RELIC_LOG_LEVEL: debug

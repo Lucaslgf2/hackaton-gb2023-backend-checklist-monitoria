@@ -1,0 +1,120 @@
+{
+  "template": {
+    "name": "pdd-template-javascript-serverless",
+    "description": "Creates an aws lambda",
+    "version": "1.0.0",
+    "parameters": [
+      {
+        "type": "input",
+        "name": "domain",
+        "message": "VS or Chapter",
+        "regex": "[a-z0-9-]+",
+        "scope": "global"
+      },
+      {
+        "type": "input",
+        "name": "component",
+        "message": "Component Name",
+        "regex": "[a-z0-9-]+",
+        "scope": "global"
+      },
+      {
+        "type": "input",
+        "name": "system",
+        "message": "Project or Product",
+        "regex": "[a-z0-9-]+",
+        "scope": "global"
+      },
+      {
+        "type": "input",
+        "name": "team",
+        "message": "Team name",
+        "regex": "^[a-z|A-Z]+",
+        "scope": "global"
+      },
+      {
+        "name": "componentDescription",
+        "type": "input",
+        "message": "Component Description",
+        "regex": "^(\\w|\\s){1,500}$",
+        "scope": "global"
+      },
+      {
+        "name": "enableApiGateway",
+        "type": "list",
+        "message": "Enable API gateway?",
+        "default": "No",
+        "choices": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "enableStepFunction",
+        "type": "list",
+        "message": "Enable Step Functions?",
+        "default": "No",
+        "choices": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      },
+      {
+        "name": "enableVpc",
+        "type": "list",
+        "message": "Enable VPC?",
+        "default": "No",
+        "choices": [
+          {
+            "name": "Yes"
+          },
+          {
+            "name": "No"
+          }
+        ]
+      }
+    ]
+  },
+  "templates": [
+    {
+      "name": "scafflater-template",
+      "version": "0.0.1",
+      "source": {
+        "name": "github",
+        "key": "https://github.com/scafflater/scafflater-template",
+        "options": {
+          "baseUrl": "https://github.com",
+          "baseUrlApi": "https://api.github.com"
+        }
+      },
+      "partials": [
+        {
+          "name": "add-partial",
+          "parameters": {
+            "name": "add-step-function",
+            "description": "add-step-function"
+          }
+        },
+        {
+          "name": "add-partial",
+          "parameters": {
+            "name": "configure-vpc",
+            "description": "Configure VPC"
+          }
+        }
+      ],
+      "parameters": {
+        "name": "pdd-template-javascript-serverless",
+        "description": "Creates an aws lambda"
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "n/no-missing-require": 0,
+    "n/no-unpublished-require": 0
+  }
+}

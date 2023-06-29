@@ -1,0 +1,93 @@
+service: pdd-template-javascript-serverless
+
+frameworkVersion: '3'
+
+useDotenv: true
+configValidationMode: warn
+
+plugins:
+  - serverless-plugin-lambda-insights
+  - serverless-prune-plugin
+  - serverless-plugin-conditional-functions
+  - serverless-newrelic-lambda-layers
+  - serverless-offline
+
+provider:
+  name: aws
+  architecture: arm64
+  memorySize: ${file(./resources/serverless.${self:provider.stage}.yml):provider.memorySize}
+  region: ${opt:region}
+  stage: ${opt:stage}
+  runtime: nodejs18.x
+  timeout: ${file(./resources/serverless.${self:provider.stage}.yml):provider.timeout}
+  versionFunctions: true
+  stackName: serverless-${self:service}-${self:provider.stage}
+  logRetentionInDays: 3
+  iam:
+    role: arn:aws:iam::${env:AWS_ACCOUNT_ID}:role/${self:service}-role-application
+  stackTags:
+    Account: ${env:VS}-${self:provider.stage}
+    App: ${self:service}
+    Environment: ${self:provider.stage}
+    Name: ${self:service}
+    Entity: ${env:VS}
+    Product: ${self:service}
+    Service-Provided: lambda
+    Squad: pdd
+    Tier: backend
+    VS: ${env:VS}
+  deploymentBucket:
+    name: sls-vs-${env:VS}-${self:provider.stage}-deployment
+  environment: ${file(./resources/serverless.${self:provider.stage}.yml):environment}
+
+package:
+  individually: false
+  excludeDevDependencies: true
+  patterns:
+    - src/**
+    - "!.github/**"
+    - "!.scafflater/**"
+    - "!.scannerwork/**"
+    - "!.vscode/**"
+    - "!coverage/**"
+    - "!dist-*/**"
+    - "!dist/**"
+    - "!kube/**"
+    - "!resources/**"
+    - "!test/**"
+    - "!.editorconfig"
+    - "!.eslintrc.json"
+    - "!.gitignore"
+    - "!.nvmrc"
+    - "!.prettier*"
+    - "!catalog-info.yaml"
+    - "!jest.config.js"
+    - "!package.json"
+    - "!package-lock.json"
+    - "!Jenkinsfile"
+    - "!jenkins.env"
+    - "!README.md"
+    - "!scripts.sh"
+    - "!serverless.yml"
+    - "!sonar-project.properties"
+
+custom:
+  lambdaInsights:
+    defaultLambdaInsights: true
+  newRelic:
+    accountId: ${env:NEWRELIC_ACCOUNT_ID}
+    apiKey: ${env:NEWRELIC_API_KEY}
+    disableAutoSubscription: true
+    disableLicenseKeySecret: true
+    enableFunctionLogs: true
+    enableIntegration: false
+    linkedAccount: vs-${env:VS}-${self:provider.stage}
+    trustedAccountKey: ${env:NEWRELIC_TRUSTED_ACCOUNT_KEY}
+  prune:
+    automatic: true
+    number: 3
+
+functions:
+  defaultFunction:
+    enabled: true
+    handler: src/defaultFunction.handler

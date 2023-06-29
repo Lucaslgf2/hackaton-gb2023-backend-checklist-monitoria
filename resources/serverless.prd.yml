@@ -1,0 +1,10 @@
+# Description: Serverless configuration for prd environment
+
+provider:
+  memorySize: 256
+  timeout: 6
+
+environment:
+  AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+  NODE_ENV: production
+  NEW_RELIC_LOG_LEVEL: error

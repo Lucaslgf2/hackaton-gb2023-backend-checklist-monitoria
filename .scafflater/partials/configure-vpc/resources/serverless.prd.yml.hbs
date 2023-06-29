@@ -1,0 +1,10 @@
+{{!-- @scf-option { "targetName": "serverless.prd.yml" } --}}
+{{!-- @scf-option { "appenders": ["./appenders/yaml-appender"] } --}}
+
+provider:
+  vpc:
+    securityGroupIds:
+      - {{parameters.domainInfo.aws.prd.security-groups.lambda-internal}}
+    subnetIds:
+      - {{parameters.domainInfo.aws.prd.subnets.private.subnet-1}}
+      - {{parameters.domainInfo.aws.prd.subnets.private.subnet-2}}
