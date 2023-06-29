@@ -21,6 +21,36 @@
   ],
 
   "paths": {
+    "/auditoria": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/consultor": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
     "/rota-teste-auditoria-atendimento": {
       "get": {
         "tags": ["---"],

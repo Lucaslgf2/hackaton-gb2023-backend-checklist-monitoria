@@ -24,9 +24,10 @@ export abstract class TypeORMConnection {
     }
   }
 
-  protected async executeQuery (querySql: string, params?: any[]): Promise<object[]> {
+  protected async executeQuery (querySql: string, params?: any[]): Promise<any[]> {
     await this.connect()
     const rows = await this.appDataSource.query(querySql, params)
+    // const [rows] = await this.appDataSource.query(querySql, params)
     return rows
   }
 }

@@ -158,4 +158,34 @@ functions:
             headers: '*'
           private: true
 
+  consultor:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/consultor-route.getConsultorHandler'
+    events:
+      - http:
+          path: /consultor
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+  auditoria:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/auditoria-route.getAuditoriaHandler'
+    events:
+      - http:
+          path: /auditoria
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
 # PLOP_REPLACE
+
+

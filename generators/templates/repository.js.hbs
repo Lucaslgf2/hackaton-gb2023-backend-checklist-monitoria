@@ -1,0 +1,17 @@
+import { I{{pascalCase name}}Repo, Ns{{pascalCase name}}Repo } from '@/data/protocols/{{dashCase name}}/{{dashCase name}}-repo-protocol'
+import { BigQueryPgiRevenue } from '@/infra/adapters/db-big-query/big-query-pgi-revenue'
+
+export class {{pascalCase name}}Repository extends TypeORMConnection implements I{{pascalCase name}}Repo {
+  async select (params: Ns{{pascalCase name}}Repo.Input): Promise<Ns{{pascalCase name}}Repo.Output> {
+    const querySql = 'SELECT 1 AS value'
+
+    const sqlParams = [] // this.getSqlParamsObject(params)
+
+    const resultDb = await this.executeQuery(querySql, sqlParams)
+    if (resultDb?.length) {
+      return resultDb.map(item => ({
+        aux: 'aux-test'
+      }))
+    }
+  }
+}

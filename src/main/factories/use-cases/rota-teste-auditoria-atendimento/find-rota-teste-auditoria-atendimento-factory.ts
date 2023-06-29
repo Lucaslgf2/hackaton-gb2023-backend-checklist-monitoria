@@ -5,4 +5,3 @@ import { makeAuxRepository } from '../../repositories/aux-repository.factory'
 export const makeFindRotaTesteAuditoriaAtendimento = (): IFindRotaTesteAuditoriaAtendimento => {
   return new FindRotaTesteAuditoriaAtendimento(makeAuxRepository())
 }
-''

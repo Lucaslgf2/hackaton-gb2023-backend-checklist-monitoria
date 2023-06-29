@@ -49,18 +49,18 @@ module.exports = function (plop) {
             templateFile: 'templates/validation-factory.js.hbs',
             skipIfExists: true
           },
-          // {
-          //  type: 'add',
-          //  path: '../src/infra/adapters/db-big-query/repository/{{dashCase name}}-repository.ts',
-          //  templateFile: 'templates/repository.js.hbs',
-          //  skipIfExists: true
-          // },
-          // {
-          //  type: 'add',
-          //  path: '../src/main/factories/repositories/{{dashCase name}}-repository-factory.ts',
-          //  templateFile: 'templates/repository-factory.js.hbs',
-          //  skipIfExists: true
-          // },
+          {
+            type: 'add',
+            path: '../src/infra/adapters/typeorm/repositories/{{dashCase name}}-repository.ts',
+            templateFile: 'templates/repository.js.hbs',
+            skipIfExists: true
+          },
+          {
+            type: 'add',
+            path: '../src/main/factories/repositories/{{dashCase name}}-repository-factory.ts',
+            templateFile: 'templates/repository-factory.js.hbs',
+            skipIfExists: true
+          },
           {
             type: 'add',
             path: '../src/data/use-cases/{{dashCase name}}/find-{{dashCase name}}.ts',
