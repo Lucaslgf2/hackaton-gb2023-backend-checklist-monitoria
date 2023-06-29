@@ -151,7 +151,7 @@ functions:
     handler: 'src/main/routes/consultor-route.getConsultorHandler'
     events:
       - http:
-          path: /consultor/{consultorId}
+          path: /consultor
           method: get
           cors:
             origin: '*'
@@ -165,7 +165,7 @@ functions:
     handler: 'src/main/routes/auditoria-route.getAuditoriaHandler'
     events:
       - http:
-          path: /auditoria/{auditoriaId}
+          path: /auditoria
           method: get
           cors:
             origin: '*'
@@ -200,6 +200,18 @@ functions:
             headers: '*'
           private: true
 
+  monitoria:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/monitoria-route.postMonitoriaHandler'
+    events:
+      - http:
+          path: /monitoria
+          method: post
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
 # PLOP_REPLACE
-
-
