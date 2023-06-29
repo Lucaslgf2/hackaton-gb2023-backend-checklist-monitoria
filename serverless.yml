@@ -3,13 +3,16 @@ frameworkVersion: '3'
 useDotenv: true
 configValidationMode: warn
 plugins:
+  - serverless-plugin-typescript
+  - serverless-tscpaths #should be after serverless-plugin-typescript
+  - serverless-dotenv-plugin
+  - serverless-associate-waf
+  - serverless-domain-manager
   - serverless-plugin-lambda-insights
   - serverless-prune-plugin
   - serverless-plugin-conditional-functions
   - serverless-newrelic-lambda-layers
-  - serverless-offline
-  - serverless-associate-waf
-  - serverless-domain-manager
+  - serverless-offline #needs to be last in the list
 provider:
   name: aws
   architecture: arm64
@@ -51,6 +54,7 @@ provider:
   tracing:
     apiGateway: true
   vpc: ${file(./resources/serverless.${self:provider.stage}.yml):provider.vpc}
+
 package:
   individually: false
   excludeDevDependencies: true
@@ -65,7 +69,7 @@ package:
     - '!dist/**'
     - '!kube/**'
     - '!resources/**'
-    - '!test/**'
+    - '!tests/**'
     - '!.editorconfig'
     - '!.eslintrc.json'
     - '!.gitignore'
@@ -81,6 +85,7 @@ package:
     - '!scripts.sh'
     - '!serverless.yml'
     - '!sonar-project.properties'
+
 custom:
   lambdaInsights:
     defaultLambdaInsights: true
@@ -105,13 +110,36 @@ custom:
     stage: ${self:provider.stage}
     createRoute53Record: false
     basePath: ''
+  serverlessOffline:
+    useChildProcesses: true
+
 functions:
   defaultFunction:
     enabled: true
     handler: src/defaultFunction.handler
     events:
       - http:
-          path: /
+          path: /default-function
           method: get
           cors: true
           private: true
+
+  apiDocs:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/api-docs-route.getApiDocsHandler'
+    events:
+      - http:
+          path: /api-docs
+          method: get
+
+  swaggerJson:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/swagger-json-route.getSwaggerJsonHandler'
+    events:
+      - http:
+          path: /swagger.json
+          method: get
