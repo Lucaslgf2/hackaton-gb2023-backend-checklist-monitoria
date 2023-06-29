@@ -1,12 +1,12 @@
-import { IFind{{pascalCase name}} } from '@/domain/protocols/{{dashCase name}}/{{dashCase name}}-protocol'
+import { IFindRotaTesteAuditoriaAtendimento } from '@/domain/protocols/rota-teste-auditoria-atendimento/rota-teste-auditoria-atendimento-protocol'
 import ErrorHandler from '@/presentation/http/error-handler'
 import { badRequest, notFound, ok } from '@/presentation/http/http-status'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '@/presentation/protocols'
 
-export class {{pascalCase verb}}{{pascalCase name}}Controller implements IController {
+export class GetRotaTesteAuditoriaAtendimentoController implements IController {
   constructor (
     private readonly validation: IValidation,
-    private readonly find{{pascalCase name}}: IFind{{pascalCase name}}
+    private readonly findRotaTesteAuditoriaAtendimento: IFindRotaTesteAuditoriaAtendimento
   ) {}
 
   @ErrorHandler()
@@ -16,7 +16,7 @@ export class {{pascalCase verb}}{{pascalCase name}}Controller implements IContro
       return badRequest(error)
     }
 
-    const result = await this.find{{pascalCase name}}.find(null)
+    const result = await this.findRotaTesteAuditoriaAtendimento.find(null)
     return result ? ok(result) : notFound()
   }
 }

@@ -157,3 +157,20 @@ functions:
       - http:
           path: /swagger.json
           method: get
+
+  rotaTesteAuditoriaAtendimento:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/rota-teste-auditoria-atendimento-route.getRotaTesteAuditoriaAtendimentoHandler'
+    events:
+      - http:
+          path: /rota-teste-auditoria-atendimento
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+# PLOP_REPLACE
+
