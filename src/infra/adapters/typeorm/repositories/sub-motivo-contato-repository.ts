@@ -1,5 +1,5 @@
 import { ISubMotivoContatoRepo, NsSubMotivoContatoRepo } from '@/data/protocols/sub-motivo-contato/sub-motivo-contato-repo-protocol'
-import { BigQueryPgiRevenue } from '@/infra/adapters/db-big-query/big-query-pgi-revenue'
+import { TypeORMConnection } from '../typeorm-connection'
 
 export class SubMotivoContatoRepository extends TypeORMConnection implements ISubMotivoContatoRepo {
   async select (params: NsSubMotivoContatoRepo.Input): Promise<NsSubMotivoContatoRepo.Output> {

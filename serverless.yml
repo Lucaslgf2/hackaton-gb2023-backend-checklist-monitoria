@@ -222,7 +222,7 @@ functions:
           private: true
       - http:
           path: /amostragem/{amostragemId}
-se          method: get
+          method: get
           cors:
             origin: '*'
             headers: '*'
@@ -285,6 +285,3 @@ se          method: get
           private: true
 
 # PLOP_REPLACE
-
-
-

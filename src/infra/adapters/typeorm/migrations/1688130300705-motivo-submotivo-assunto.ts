@@ -126,7 +126,6 @@ export class Motivo_Submotivo_Assunto_1688130300705 implements MigrationInterfac
     await queryRunner.query('INSERT INTO MotivoContato (Descricao) VALUES (\'Ambientação\')')
 
     //* ********************************* */
-    await queryRunner.query('INSERT INTO SubMotivoContato (CodigoMotivoContato, Descricao) VALUES (0, \'Venda\')')
     await queryRunner.query('INSERT INTO SubMotivoContato (CodigoMotivoContato, Descricao) VALUES (1, \'Iniciar ou Atualizar Sistemas e Dispositivos\')')
     await queryRunner.query('INSERT INTO SubMotivoContato (CodigoMotivoContato, Descricao) VALUES (1, \'Abrir e Fechar o Caixa\')')
     await queryRunner.query('INSERT INTO SubMotivoContato (CodigoMotivoContato, Descricao) VALUES (1, \'Aplicar Desconto ou Promoção\')')

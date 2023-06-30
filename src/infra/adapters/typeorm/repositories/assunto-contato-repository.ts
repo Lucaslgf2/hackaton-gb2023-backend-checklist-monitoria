@@ -1,5 +1,5 @@
 import { IAssuntoContatoRepo, NsAssuntoContatoRepo } from '@/data/protocols/assunto-contato/assunto-contato-repo-protocol'
-import { BigQueryPgiRevenue } from '@/infra/adapters/db-big-query/big-query-pgi-revenue'
+import { TypeORMConnection } from '../typeorm-connection'
 
 export class AssuntoContatoRepository extends TypeORMConnection implements IAssuntoContatoRepo {
   async select (params: NsAssuntoContatoRepo.Input): Promise<NsAssuntoContatoRepo.Output> {
