@@ -19,4 +19,10 @@ export abstract class TypeORMConnection {
     const rows = await this.appDataSource.query(querySql, params)
     return rows
   }
+
+  protected async executeInsert (querySql: string, params?: any[]): Promise<any> {
+    await this.connect()
+    const rows = await this.appDataSource.query(querySql, params)
+    return rows
+  }
 }
