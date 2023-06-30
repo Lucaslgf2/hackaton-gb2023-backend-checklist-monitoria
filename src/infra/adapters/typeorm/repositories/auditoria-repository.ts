@@ -34,7 +34,7 @@ export class AuditoriaRepository extends TypeORMConnection implements IAuditoria
         CodigoSubItemIndicador: item.CodigoSubItemIndicador,
         DescSubItemIndicador: item.DescSubItemIndicador,
         Resumo: item.Resumo,
-        Peso: item.Peso
+        Peso: Number(item.Peso)
       }))
     }
   }

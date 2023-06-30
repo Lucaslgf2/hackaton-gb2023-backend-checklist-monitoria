@@ -11,12 +11,14 @@ export class GetConsultorController implements IController {
 
   @ErrorHandler()
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const error = this.validation.validate(httpRequest.queryParams)
+    const error = this.validation.validate(httpRequest.pathParams)
     if (error) {
       return badRequest(error)
     }
 
-    const result = await this.findConsultor.find(null)
+    const { consultorId } = httpRequest.pathParams
+
+    const result = await this.findConsultor.find({ consultorId })
     return result ? ok(result) : notFound()
   }
 }

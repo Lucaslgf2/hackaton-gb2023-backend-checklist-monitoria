@@ -1,18 +1,16 @@
 import { IValidation } from '@/presentation/protocols'
+import { GenericValuesValidation } from '@/validation/validators/generic-values-validation'
+import { RequiredFieldValidation } from '@/validation/validators/required-field-validation'
+import { TypeValidation } from '@/validation/validators/type-validation'
 import { ValidationComposite } from '@/validation/validators/validation-composite'
 
 export const makeGetAuditoriaValidation = (): IValidation => {
   const validations: IValidation[] = []
 
-  // validations.push(new RequiredFieldValidation('startCurrentDate'))
-  // validations.push(new RequiredFieldValidation('endCurrentDate'))
-  // validations.push(new RequiredFieldValidation('startPreviousDate'))
-  // validations.push(new RequiredFieldValidation('endPreviousDate'))
+  validations.push(new RequiredFieldValidation('canalAtendimento'))
+  validations.push(new GenericValuesValidation('canalAtendimento', ['C', 'V']))
 
-  // validations.push(new ISODateValidation('startCurrentDate'))
-  // validations.push(new ISODateValidation('endCurrentDate'))
-  // validations.push(new ISODateValidation('startPreviousDate'))
-  // validations.push(new ISODateValidation('endPreviousDate'))
+  validations.push(new TypeValidation('auditoriaId', 'number'))
 
   return new ValidationComposite(validations)
 }

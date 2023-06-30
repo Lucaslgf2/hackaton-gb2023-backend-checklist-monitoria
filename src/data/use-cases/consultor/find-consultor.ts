@@ -13,8 +13,8 @@ export class FindConsultor implements IFindConsultor {
         consultorId: item.CodigoConsultor,
         nomeConsultor: item.Nome,
         email: item.Email,
+        vs: item.Vs,
         tempoCasa: item.TempoCasa,
-        vs: item.VS,
         celulaAtendimento: item.CelulaAtendimento,
         supervisor: item.Supervisor
       }

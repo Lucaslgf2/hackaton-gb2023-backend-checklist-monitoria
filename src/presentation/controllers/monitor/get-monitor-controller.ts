@@ -11,7 +11,7 @@ export class GetMonitorController implements IController {
 
   @ErrorHandler()
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const error = this.validation.validate(httpRequest.queryParams)
+    const error = this.validation.validate(httpRequest.pathParams)
     if (error) {
       return badRequest(error)
     }

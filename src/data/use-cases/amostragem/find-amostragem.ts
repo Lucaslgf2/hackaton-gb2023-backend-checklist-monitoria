@@ -7,25 +7,12 @@ export class FindAmostragem implements IFindAmostragem {
   ) {}
 
   async find (params: NsAmostragem.Input): Promise<NsAmostragem.Output> {
-    const dbRows = {}// await this.amostragemRepo.select(params)
-    console.log(dbRows)
-    return [
-      {
-        amostragemId: 1,
-        descricao: 'ALEATÓRIA'
-      },
-      {
-        amostragemId: 2,
-        descricao: 'DOMÍNIO TÉCNICO'
-      },
-      {
-        amostragemId: 3,
-        descricao: 'FCR'
-      },
-      {
-        amostragemId: 4,
-        descricao: 'REGISTRO DE CASO'
+    const dbRows = await this.amostragemRepo.select(params)
+    return dbRows?.map(item => {
+      return {
+        amostragemId: item.CodigoAmostragem,
+        descricao: item.Descricao
       }
-    ]
+    })
   }
 }

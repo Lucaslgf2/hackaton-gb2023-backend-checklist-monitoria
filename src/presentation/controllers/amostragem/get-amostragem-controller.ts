@@ -11,12 +11,14 @@ export class GetAmostragemController implements IController {
 
   @ErrorHandler()
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const error = this.validation.validate(httpRequest.queryParams)
+    const error = this.validation.validate(httpRequest.pathParams)
     if (error) {
       return badRequest(error)
     }
 
-    const result = await this.findAmostragem.find(null)
+    const { amostragemId } = httpRequest.pathParams
+
+    const result = await this.findAmostragem.find({ amostragemId })
     return result ? ok(result) : notFound()
   }
 }

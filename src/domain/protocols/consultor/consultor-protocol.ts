@@ -1,5 +1,5 @@
 export namespace NsConsultor {
-  export type Input = null
+  export type Input = { consultorId?: number }
 
   export type Output = Array<{
     consultorId: number

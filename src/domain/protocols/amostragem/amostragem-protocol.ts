@@ -1,5 +1,5 @@
 export namespace NsAmostragem {
-  export type Input = null
+  export type Input = { amostragemId?: number }
 
   export type Output = Array<{
     amostragemId: number

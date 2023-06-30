@@ -3,7 +3,14 @@ import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class ConsultorRepository extends TypeORMConnection implements IConsultorRepo {
   async select (params: NsConsultorRepo.Input): Promise<NsConsultorRepo.Output> {
-    const querySql = 'SELECT * FROM Consultor'
+    const querySql = `
+      SELECT
+        CodigoConsultor, Nome, Email, Vs, TempoCasa, CelularAtendimento, Supervisor
+      FROM Consultor
+      WHERE 1=1
+        ${params.consultorId ? `AND CodigoConsultor=${params.consultorId}` : ''}
+      ORDER BY CodigoConsultor;
+    `
 
     const sqlParams: any[] = []
 
@@ -13,8 +20,8 @@ export class ConsultorRepository extends TypeORMConnection implements IConsultor
         CodigoConsultor: item.CodigoConsultor,
         Nome: item.Nome,
         Email: item.Email,
+        Vs: item.Vs,
         TempoCasa: item.TempoCasa,
-        VS: item.VS,
         CelulaAtendimento: item.CelulaAtendimento,
         Supervisor: item.Supervisor
       }))

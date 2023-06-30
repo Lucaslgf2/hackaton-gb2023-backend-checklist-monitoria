@@ -1,7 +1,10 @@
 export namespace NsAmostragemRepo {
-  export type Input = null
+  export type Input = { amostragemId?: number }
 
-  export type Output = [] | undefined
+  export type Output = Array<{
+    CodigoAmostragem: number
+    Descricao: string
+  }> | undefined
 }
 
 export interface IAmostragemRepo {

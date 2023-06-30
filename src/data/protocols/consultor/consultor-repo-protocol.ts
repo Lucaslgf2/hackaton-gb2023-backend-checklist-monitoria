@@ -1,12 +1,12 @@
 export namespace NsConsultorRepo {
-  export type Input = null
+  export type Input = { consultorId?: number }
 
   export type Output = Array<{
     CodigoConsultor: number
     Nome: string
     Email: string
+    Vs: string
     TempoCasa: string
-    VS: string
     CelulaAtendimento: string
     Supervisor: string
   }> | undefined

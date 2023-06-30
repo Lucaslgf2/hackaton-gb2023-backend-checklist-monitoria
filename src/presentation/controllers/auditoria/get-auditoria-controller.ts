@@ -11,14 +11,16 @@ export class GetAuditoriaController implements IController {
 
   @ErrorHandler()
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const error = this.validation.validate(httpRequest.pathParams)
+    const toValidate = { ...httpRequest.pathParams, ...httpRequest.queryParams }
+    const error = this.validation.validate(toValidate)
     if (error) {
       return badRequest(error)
     }
 
     const { auditoriaId } = httpRequest.pathParams
+    const { canalAtendimento } = httpRequest.queryParams
 
-    const result = await this.findAuditoria.find({ auditoriaId })
+    const result = await this.findAuditoria.find({ auditoriaId, canalAtendimento })
     return result ? ok(result) : notFound()
   }
 }

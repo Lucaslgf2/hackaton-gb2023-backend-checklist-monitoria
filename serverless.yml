@@ -144,20 +144,6 @@ functions:
           path: /swagger.json
           method: get
 
-  consultor:
-    enabled: true
-    disableLogs: true
-    architecture: ${self:provider.architecture}
-    handler: 'src/main/routes/consultor-route.getConsultorHandler'
-    events:
-      - http:
-          path: /consultor
-          method: get
-          cors:
-            origin: '*'
-            headers: '*'
-          private: true
-
   auditoria:
     enabled: true
     disableLogs: true
@@ -200,6 +186,27 @@ functions:
             headers: '*'
           private: true
 
+  consultor:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/consultor-route.getConsultorHandler'
+    events:
+      - http:
+          path: /consultor
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+      - http:
+          path: /consultor/{consultorId}
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
   amostragem:
     enabled: true
     disableLogs: true
@@ -209,6 +216,13 @@ functions:
       - http:
           path: /amostragem
           method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+      - http:
+          path: /amostragem/{amostragemId}
+se          method: get
           cors:
             origin: '*'
             headers: '*'
