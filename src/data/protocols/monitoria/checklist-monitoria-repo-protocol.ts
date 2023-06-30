@@ -1,5 +1,5 @@
-export namespace NsMonitoriaRepo {
-  export type Input = {
+export namespace NsChecklistMonitoriaRepo {
+  export type Input = Array<{
     auditoriaId: number
     canalAtendimento: 'C' | 'V'
     consultorId: number
@@ -8,8 +8,6 @@ export namespace NsMonitoriaRepo {
     dataAtendimento: string
     transcricaoId: number
     tempoLigacao: number
-    assuntoContatoId: number
-    amostragemId: number
     comentarioGeral: string
     indicadores: Array<{
       subItemId: number
@@ -17,11 +15,11 @@ export namespace NsMonitoriaRepo {
       status: 'AT' | 'NT' | 'NA'
       comentario: string
     }>
-  }
+  }>
 
-  export type Output = { CodigoMonitoria: number } | undefined
+  export type Output = { CodigoChecklistMonitoriaRepo: number } | undefined
 }
 
-export interface IMonitoriaRepo {
-  insert: (params: NsMonitoriaRepo.Input) => Promise<NsMonitoriaRepo.Output>
+export interface IChecklistMonitoriaRepo {
+  insert: (params: NsChecklistMonitoriaRepo.Input) => Promise<NsChecklistMonitoriaRepo.Output>
 }

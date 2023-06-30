@@ -42,14 +42,6 @@ export class Monitoria_ChecklistMonitoria_1688096123707 implements MigrationInte
           type: 'integer'
         },
         {
-          name: 'CodigoMotivoContato',
-          type: 'integer'
-        },
-        {
-          name: 'CodigoSubMotivoContato',
-          type: 'integer'
-        },
-        {
           name: 'CodigoAssuntoContato',
           type: 'integer'
         },
@@ -141,7 +133,8 @@ export class Monitoria_ChecklistMonitoria_1688096123707 implements MigrationInte
         },
         {
           name: 'Status',
-          type: 'char'
+          type: 'char',
+          length: '2'
         },
         {
           name: 'Comentario',

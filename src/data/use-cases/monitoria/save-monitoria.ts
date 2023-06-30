@@ -7,7 +7,9 @@ export class SaveMonitoria implements ISaveMonitoria {
   ) {}
 
   async save (params: NsMonitoria.Input): Promise<NsMonitoria.Output> {
-    const dbRows = await this.monitoriaRepo.select(params)
-    return dbRows
+    const resultDb = await this.monitoriaRepo.insert(params)
+    if (resultDb) {
+      return { monitoriaId: resultDb.CodigoMonitoria }
+    }
   }
 }
