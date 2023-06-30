@@ -28,7 +28,7 @@ export class MonitoriaRepository extends TypeORMConnection implements IMonitoria
         Consultor.Supervisor,
         Consultor.NumeroAvaya,
         Monitor.CodigoMonitor,
-        Monitor.NomeMonitor,
+        Monitor.Nome AS NomeMonitor,
         Monitor.Vs AS VsMonitor,
         Amostragem.CodigoAmostragem,
         Amostragem.Descricao AS DescAmostragem,
