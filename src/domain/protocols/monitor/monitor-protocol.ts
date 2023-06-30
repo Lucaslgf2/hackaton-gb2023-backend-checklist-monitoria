@@ -1,9 +1,10 @@
 export namespace NsMonitor {
-  export type Input = null
+  export type Input = { monitorId?: number }
 
   export type Output = Array<{
     monitorId: number
     nomeMonitor: string
+    vs: string
   }> | undefined
 }
 

@@ -16,7 +16,9 @@ export class GetMonitorController implements IController {
       return badRequest(error)
     }
 
-    const result = await this.findMonitor.find(null)
+    const { monitorId } = httpRequest.pathParams
+
+    const result = await this.findMonitor.find({ monitorId })
     return result ? ok(result) : notFound()
   }
 }

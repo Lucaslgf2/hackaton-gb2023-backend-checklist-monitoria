@@ -7,58 +7,59 @@ export class FindAuditoria implements IFindAuditoria {
   ) {}
 
   async find (params: NsAuditoria.Input): Promise<NsAuditoria.Output> {
-    const dbRows = {}// await this.auditoriaRepo.select(params)
-    console.log(dbRows)
-    return [
-      {
-        auditoriaId: 1,
-        nomeAuditoria: 'Assertividade',
-        indicadores: [
-          {
-            indicadorId: 1,
-            nomeIndicador: 'Satisfação',
-            itens: [
-              {
-                itemId: 1,
-                nomeItem: 'Prontidão',
-                subitens: [
-                  {
-                    subItemId: 1,
-                    nomeSubItem: 'Saudação',
-                    descricao: 'Atender prontamente dentro dos parametros acordados.\n\n0- CSF\n\nTelefone: 5 segundos | Chat: 30 segundos',
-                    Peso: 7
-                  }
-                ]
-              },
-              {
-                itemId: 2,
-                nomeItem: 'Manutenção do diálogo',
-                subitens: [
-                  {
-                    subItemId: 1,
-                    nomeSubItem: 'Manutenção do diálogo',
-                    descricao: 'Fone: 3 minutos ou combinado previamente.\n\nChat: 5 minutos ou combinado previamente.',
-                    Peso: 5
-                  }
-                ]
-              },
-              {
-                itemId: 3,
-                nomeItem: 'Linguagem',
-                subitens: [
-                  {
-                    subItemId: 1,
-                    nomeSubItem: 'Uso incorreto da linguagem Erro de ortografia / digitação / pronúncia / Gerundismo / pontuação / acentuação / escrita / caixa alta.',
-                    descricao: 'Se o assistente cometeu 3 erros de linguagem ele será pontuado. Sem tolerância para casos que o erro mude o sentido da palavra ou da frase.',
-                    Peso: 9
-                  }
-                ]
-              }
+    const dbRows = await this.auditoriaRepo.select(params)
+    if (dbRows) {
+      const result: NsAuditoria.Output = []
 
-            ]
+      const distinctAuditoriaIds = [...new Set(dbRows.map(item => (item.CodigoAuditoria)))]
+      for (const auditoriaId of distinctAuditoriaIds) {
+        const objAuditoria = dbRows.find(item => (item.CodigoAuditoria === auditoriaId))
+        if (objAuditoria) {
+          result.push({
+            auditoriaId: objAuditoria?.CodigoAuditoria,
+            nomeAuditoria: objAuditoria?.DescAuditoria,
+            indicadores: []
+          })
+        }
+
+        const distinctIndicadorIds = [...new Set(dbRows.map(item => (item.CodigoIndicador)))]
+        for (const indicadorId of distinctIndicadorIds) {
+          const objIndicador = dbRows.find(item => (item.CodigoAuditoria === auditoriaId && item.CodigoIndicador === indicadorId))
+          if (objIndicador) {
+            result.find(item => (item.auditoriaId === auditoriaId))?.indicadores.push({
+              indicadorId: objIndicador.CodigoIndicador,
+              nomeIndicador: objIndicador.DescIndicador,
+              itens: []
+            })
           }
-        ]
+
+          const distinctItemIndicadorIds = [...new Set(dbRows.map(item => (item.CodigoItemIndicador)))]
+          for (const itemIndicadorId of distinctItemIndicadorIds) {
+            const objItemIndicador = dbRows.find(item => (item.CodigoAuditoria === auditoriaId && item.CodigoIndicador === indicadorId && item.CodigoItemIndicador === itemIndicadorId))
+            if (objItemIndicador) {
+              result.find(item => (item.auditoriaId === auditoriaId))?.indicadores.find(item => (item.indicadorId === indicadorId))?.itens.push({
+                itemId: objItemIndicador.CodigoItemIndicador,
+                nomeItem: objItemIndicador.DescItemIndicador,
+                subitens: []
+              })
+            }
+
+            const distinctSubItemIndicadorIds = [...new Set(dbRows.map(item => (item.CodigoSubItemIndicador)))]
+            for (const subItemIndicadorId of distinctSubItemIndicadorIds) {
+              const objSubItemIndicador = dbRows.find(item => (item.CodigoAuditoria === auditoriaId && item.CodigoIndicador === indicadorId && item.CodigoItemIndicador === itemIndicadorId && item.CodigoSubItemIndicador === subItemIndicadorId))
+              if (objSubItemIndicador) {
+                result.find(item => (item.auditoriaId === auditoriaId))?.indicadores.find(item => (item.indicadorId === indicadorId))?.itens.find(item => (item.itemId === itemIndicadorId))?.subitens.push({
+                  subItemId: objSubItemIndicador.CodigoSubItemIndicador,
+                  nomeSubItem: objSubItemIndicador.DescSubItemIndicador,
+                  resumo: objSubItemIndicador.Resumo,
+                  peso: objSubItemIndicador.Peso
+                })
+              }
+            }
+          }
+        }
       }
-    ]
+      return result
+    }
   }
 }

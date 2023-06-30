@@ -147,16 +147,6 @@ export class Monitoria_1688096123707 implements MigrationInterface {
           isPrimary: true
         },
         {
-          name: 'CodigoIndicador',
-          type: 'integer',
-          isPrimary: true
-        },
-        {
-          name: 'CodigoItemIndicador',
-          type: 'integer',
-          isPrimary: true
-        },
-        {
           name: 'CodigoSubItemIndicador',
           type: 'integer',
           isPrimary: true
@@ -187,18 +177,6 @@ export class Monitoria_1688096123707 implements MigrationInterface {
           columnNames: ['CodigoMonitoria'],
           referencedColumnNames: ['CodigoMonitoria'],
           referencedTableName: 'Monitoria'
-        },
-        {
-          name: 'FK_ChecklistMonitoria_Indicador_CodigoIndicador',
-          columnNames: ['CodigoIndicador'],
-          referencedColumnNames: ['CodigoIndicador'],
-          referencedTableName: 'Indicador'
-        },
-        {
-          name: 'FK_ChecklistMonitoria_ItemIndicador_CodigoItemIndicador',
-          columnNames: ['CodigoItemIndicador'],
-          referencedColumnNames: ['CodigoItemIndicador'],
-          referencedTableName: 'ItemIndicador'
         },
         {
           name: 'FK_ChecklistMonitoria_SubItemIndicador_CodigoSubItemIndicador',

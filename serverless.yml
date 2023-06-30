@@ -171,6 +171,13 @@ functions:
             origin: '*'
             headers: '*'
           private: true
+      - http:
+          path: /auditoria/{auditoriaId}
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
 
   monitor:
     enabled: true
@@ -180,6 +187,13 @@ functions:
     events:
       - http:
           path: /monitor
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+      - http:
+          path: /monitor/{monitorId}
           method: get
           cors:
             origin: '*'

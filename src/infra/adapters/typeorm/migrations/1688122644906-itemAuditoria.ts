@@ -18,11 +18,6 @@ export class ItemAuditoria_1688122644906 implements MigrationInterface {
           type: 'integer',
           isPrimary: true
         },
-        // {
-        //  name: 'CodigoIndicador',
-        //  type: 'integer',
-        //  isPrimary: true
-        // },
         {
           name: 'CodigoItemIndicador',
           type: 'integer',
@@ -36,12 +31,6 @@ export class ItemAuditoria_1688122644906 implements MigrationInterface {
           referencedColumnNames: ['CodigoAuditoria'],
           referencedTableName: 'Auditoria'
         },
-        // {
-        //  name: 'FK_ItemAuditoria_Indicador_CodigoIndicador',
-        //  columnNames: ['CodigoIndicador'],
-        //  referencedColumnNames: ['CodigoIndicador'],
-        //  referencedTableName: 'Indicador'
-        // }
         {
           name: 'FK_ItemAuditoria_ItemIndicador_CodigoItemIndicador',
           columnNames: ['CodigoItemIndicador'],
@@ -80,6 +69,12 @@ export class ItemAuditoria_1688122644906 implements MigrationInterface {
 
     const [registroCategorizacao] = await queryRunner.query(`SELECT CodigoItemIndicador FROM ItemIndicador WHERE CodigoIndicador=${improcedencia.CodigoIndicador} AND Descricao='Registro e Categorização'`)
     await queryRunner.query(`INSERT INTO ItemAuditoria (CodigoAuditoria, CodigoItemIndicador) VALUES (${assertividade.CodigoAuditoria}, ${registroCategorizacao.CodigoItemIndicador})`)
+
+    //* ********************************* */
+    const [qualidade] = await queryRunner.query('SELECT CodigoIndicador FROM Indicador WHERE Descricao=\'Qualidade\'')
+
+    const [registroCategorizacaoId2] = await queryRunner.query(`SELECT CodigoItemIndicador FROM ItemIndicador WHERE CodigoIndicador=${qualidade.CodigoIndicador} AND Descricao='Registro e Categorização'`)
+    await queryRunner.query(`INSERT INTO ItemAuditoria (CodigoAuditoria, CodigoItemIndicador) VALUES (${aproximacao.CodigoAuditoria}, ${registroCategorizacaoId2.CodigoItemIndicador})`)
 
     //* ********************************* */
     const [satisfacao2] = await queryRunner.query('SELECT CodigoIndicador FROM Indicador WHERE Descricao=\'Satisfação\'')

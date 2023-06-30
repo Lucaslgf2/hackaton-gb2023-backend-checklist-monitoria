@@ -1,23 +1,26 @@
 export namespace NsAuditoria {
-  export type Input = null
+  export type Input = { auditoriaId?: number }
 
+  export type SubItemModel = {
+    subItemId: number
+    nomeSubItem: string
+    resumo: string
+    peso: number
+  }
+  export type ItemModel = {
+    itemId: number
+    nomeItem: string
+    subitens: SubItemModel[]
+  }
+  export type IndicadorModel = {
+    indicadorId: number
+    nomeIndicador: string
+    itens: ItemModel[]
+  }
   export type Output = Array<{
     auditoriaId: number
     nomeAuditoria: string
-    indicadores: Array<{
-      indicadorId: number
-      nomeIndicador: string
-      itens: Array<{
-        itemId: number
-        nomeItem: string
-        subitens: Array<{
-          subItemId: number
-          nomeSubItem: string
-          descricao: string
-          Peso: number
-        }>
-      }>
-    }>
+    indicadores: IndicadorModel[]
   }> | undefined
 }
 

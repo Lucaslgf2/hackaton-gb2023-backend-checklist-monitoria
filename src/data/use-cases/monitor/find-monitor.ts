@@ -7,17 +7,13 @@ export class FindMonitor implements IFindMonitor {
   ) {}
 
   async find (params: NsMonitor.Input): Promise<NsMonitor.Output> {
-    const dbRows = {}// await this.monitorRepo.select(params)
-    console.log(dbRows)
-    return [
-      {
-        monitorId: 1,
-        nomeMonitor: 'Monitor 1'
-      },
-      {
-        monitorId: 2,
-        nomeMonitor: 'Monitor 2'
+    const dbRows = await this.monitorRepo.select(params)
+    return dbRows?.map(item => {
+      return {
+        monitorId: item.CodigoMonitor,
+        nomeMonitor: item.Nome,
+        vs: item.Vs
       }
-    ]
+    })
   }
 }
