@@ -8,7 +8,7 @@ export namespace NsMonitoriaRepo {
     DataAtendimento: string
     SiglaCanal: 'C' | 'V'
     NumeroTranscricao: string
-    DuracaoLigacao: number
+    DuracaoLigacao: string
     CodigoAssuntoContato: number
     CodigoMonitor: number
     CodigoAmostragem: number
@@ -29,7 +29,7 @@ export namespace NsMonitoriaRepo {
     numeroCaso: number
     dataAtendimento: string
     transcricaoId: number
-    tempoLigacao: number
+    tempoLigacao: string
     assuntoContatoId: number
     amostragemId: number
     comentarioGeral: string

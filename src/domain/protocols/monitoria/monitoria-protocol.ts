@@ -1,4 +1,3 @@
-import { NsAuditoria } from '@/domain/protocols/auditoria/auditoria-protocol'
 
 export namespace NsMonitoria {
   export type FindInput = { monitoriaId: number }
@@ -9,14 +8,27 @@ export namespace NsMonitoria {
     numeroCaso: number
     dataAtendimento: string
     transcricaoId: number
-    tempoLigacao: number
+    tempoLigacao: string
     comentarioGeral: string
     checklistMonitoria: Array<{
       id: number
       nota: number
       status: 'AT' | 'NT' | 'NA'
       comentario: string
-      indicador: NsAuditoria.Output
+      indicador: {
+        indicadorId: number
+        nomeIndicador: string
+        item: {
+          itemId: number
+          nomeItem: string
+          subitem: {
+            subItemId: number
+            nomeSubItem: string
+            resumo: string
+            peso: number
+          }
+        }
+      }
     }>
     auditoria: {
       auditoriaId: number
@@ -63,7 +75,7 @@ export namespace NsMonitoria {
     numeroCaso: number
     dataAtendimento: string
     transcricaoId: number
-    tempoLigacao: number
+    tempoLigacao: string
     assuntoContatoId: number
     amostragemId: number
     comentarioGeral: string

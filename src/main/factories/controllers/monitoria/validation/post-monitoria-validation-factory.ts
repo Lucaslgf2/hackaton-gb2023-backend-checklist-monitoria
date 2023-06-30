@@ -28,7 +28,7 @@ export const makePostMonitoriaValidation = (): IValidation => {
   validations.push(new TypeValidation('numeroCaso', 'number'))
   validations.push(new ISODateValidation('dataAtendimento'))
   validations.push(new TypeValidation('transcricaoId', 'number'))
-  validations.push(new TypeValidation('tempoLigacao', 'number'))
+  validations.push(new TypeValidation('tempoLigacao', 'string'))
   validations.push(new TypeValidation('assuntoContatoId', 'number'))
   validations.push(new TypeValidation('amostragemId', 'number'))
   validations.push(new TypeValidation('comentarioGeral', 'string'))

@@ -63,7 +63,7 @@ export class MonitoriaRepository extends TypeORMConnection implements IMonitoria
       INSERT INTO Monitoria
         (CodigoAuditoria, CodigoConsultor, NumeroCaso, DataAtendimento, SiglaCanal, NumeroTranscricao, DuracaoLigacao, CodigoAssuntoContato, CodigoMonitor, CodigoAmostragem, DataCriacaoMonitoria, ComentarioGeral)
       VALUES
-        (${params.auditoriaId}, ${params.consultorId}, '${params.numeroCaso}', '${params.dataAtendimento}', '${params.canalAtendimento}', '${params.transcricaoId}', ${params.tempoLigacao}, ${params.assuntoContatoId}, ${params.monitorId}, ${params.amostragemId}, '${'2023-06-30'}', '${params.comentarioGeral}');
+        (${params.auditoriaId}, ${params.consultorId}, '${params.numeroCaso}', '${params.dataAtendimento}', '${params.canalAtendimento}', '${params.transcricaoId}', '${params.tempoLigacao}', ${params.assuntoContatoId}, ${params.monitorId}, ${params.amostragemId}, '${'2023-06-30'}', '${params.comentarioGeral}');
     `
     const resultInsertMonitoria = await this.executeInsert(insertSqlMonitoria)
 

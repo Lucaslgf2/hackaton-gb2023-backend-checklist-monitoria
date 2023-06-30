@@ -39,7 +39,7 @@ export class Monitoria_ChecklistMonitoria_1688096123707 implements MigrationInte
         },
         {
           name: 'DuracaoLigacao',
-          type: 'integer'
+          type: 'varchar'
         },
         {
           name: 'CodigoAssuntoContato',
