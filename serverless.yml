@@ -242,4 +242,49 @@ se          method: get
             headers: '*'
           private: true
 
+  motivoContato:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/motivo-contato-route.getMotivoContatoHandler'
+    events:
+      - http:
+          path: /motivo-contato
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+  subMotivoContato:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/sub-motivo-contato-route.getSubMotivoContatoHandler'
+    events:
+      - http:
+          path: /sub-motivo-contato
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+  assuntoContato:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/assunto-contato-route.getAssuntoContatoHandler'
+    events:
+      - http:
+          path: /assunto-contato
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
 # PLOP_REPLACE
+
+
+

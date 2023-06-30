@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class Monitoria_1688096123707 implements MigrationInterface {
+export class Monitoria_ChecklistMonitoria_1688096123707 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
       name: 'Monitoria',

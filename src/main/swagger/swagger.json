@@ -21,6 +21,51 @@
   ],
 
   "paths": {
+    "/assunto-contato": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/sub-motivo-contato": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/motivo-contato": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
     "/monitoria": {
       "post": {
         "tags": ["---"],
