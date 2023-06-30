@@ -9,75 +9,83 @@ export class FindMonitoria implements IFindMonitoria {
   async find (params: NsMonitoria.FindInput): Promise<NsMonitoria.FindOutput> {
     const dbRows = await this.monitoriaRepo.select(params)
     if (dbRows) {
-      return [
-        {
-          monitoriaId: 1,
-          dataMonitoria: 'XXX',
-          canalAtendimento: 'Chat',
-          numeroCaso: 1,
-          dataAtendimento: 'XXX',
-          transcricaoId: 1,
-          tempoLigacao: '01:00',
-          comentarioGeral: 'XXX',
-          checklistMonitoria: [
-            {
-              id: 1,
-              nota: 1,
-              status: 'AT',
-              comentario: 'XXX',
-              indicador: {
-                indicadorId: 1,
-                nomeIndicador: '',
-                item: {
-                  itemId: 1,
-                  nomeItem: '',
-                  subitem: {
-                    subItemId: 1,
-                    nomeSubItem: '',
-                    resumo: '',
-                    peso: 1
+      const result: NsMonitoria.FindOutput = []
+
+      const distinctMonitoriaIds = [...new Set(dbRows.map(item => (item.CodigoMonitoria)))]
+      for (const monitoriaId of distinctMonitoriaIds) {
+        const objFind = dbRows.find(aux => (aux.CodigoMonitoria === monitoriaId))
+        if (objFind) {
+          result.push({
+            monitoriaId: objFind.CodigoMonitoria,
+            dataMonitoria: objFind.DataCriacaoMonitoria,
+            canalAtendimento: objFind.SiglaCanal === 'C' ? 'Chat' : 'Voz',
+            numeroCaso: objFind.NumeroCaso,
+            dataAtendimento: objFind.DataAtendimento,
+            transcricaoId: objFind.NumeroTranscricao,
+            tempoLigacao: objFind.DuracaoLigacao,
+            comentarioGeral: objFind.ComentarioGeral,
+            checklistMonitoria: dbRows.filter(aux => (aux.CodigoMonitoria === monitoriaId)).map(checklistItem => {
+              return {
+                id: checklistItem.CodigoChecklistMonitoria,
+                nota: checklistItem.Nota,
+                status: checklistItem.Status as 'AT' | 'NT' | 'NA',
+                comentario: checklistItem.Comentario,
+                indicador: {
+                  indicadorId: checklistItem.CodigoIndicador,
+                  nomeIndicador: checklistItem.DescIndicador,
+                  item: {
+                    itemId: checklistItem.CodigoItemIndicador,
+                    nomeItem: checklistItem.DescItemIndicador,
+                    subitem: {
+                      subItemId: checklistItem.CodigoSubItemIndicador,
+                      nomeSubItem: checklistItem.DescSubItemIndicador,
+                      resumo: checklistItem.Resumo,
+                      peso: checklistItem.Peso
+                    }
                   }
                 }
               }
-            }
-          ],
-          auditoria: {
-            auditoriaId: 1,
-            nomeAuditoria: 'XXX'
-          },
-          consultor: {
-            consultorId: 1,
-            nomeConsultor: 'XXX',
-            email: 'XXX',
-            tempoCasa: 'XXX',
-            vs: 'XXX',
-            celulaAtendimento: 'XXX',
-            supervisor: 'XXX',
-            avayaId: 'XXX'
-          },
-          monitor: {
-            monitorId: 1,
-            nomeMonitor: 'XXX',
-            vs: 'XXX'
-          },
-          amostragem: {
-            amostragemId: 1,
-            descricao: 'XXX'
-          },
-          motivoContato: {
-            motivoContatoId: 1,
-            descricao: 'XXX',
-            subMotivoContato: {
-              subMotivoContatoId: 1,
-              descricao: 'XXX',
-              assuntoContato: {
-                assuntoContatoId: 1,
-                descricao: 'XXX'
+            }),
+            auditoria: {
+              auditoriaId: objFind.CodigoAuditoria,
+              nomeAuditoria: objFind.DescAuditoria
+            },
+            consultor: {
+              consultorId: objFind.CodigoConsultor,
+              nomeConsultor: objFind.NomeConsultor,
+              email: objFind.EmailConsultor,
+              tempoCasa: objFind.TempoCasa,
+              vs: objFind.VsConsultor,
+              celulaAtendimento: objFind.CelulaAtendimento,
+              supervisor: objFind.Supervisor,
+              avayaId: objFind.NumeroAvaya
+            },
+            monitor: {
+              monitorId: objFind.CodigoMonitor,
+              nomeMonitor: objFind.NomeMonitor,
+              vs: objFind.VsMonitor
+            },
+            amostragem: {
+              amostragemId: objFind.CodigoAmostragem,
+              descricao: objFind.DescAmostragem
+            },
+            motivoContato: {
+              motivoContatoId: objFind.CodigoMotivoContato,
+              descricao: objFind.DescMotivoContato,
+              subMotivoContato: {
+                subMotivoContatoId: objFind.CodigoSubMotivoContato,
+                descricao: objFind.DescSubMotivoContato,
+                assuntoContato: {
+                  assuntoContatoId: objFind.CodigoAssuntoContato,
+                  descricao: objFind.DescAssuntoContato
+                }
               }
             }
-          }
+          })
         }
-      ]
+      }
+
+      return result
     }
   }
 }

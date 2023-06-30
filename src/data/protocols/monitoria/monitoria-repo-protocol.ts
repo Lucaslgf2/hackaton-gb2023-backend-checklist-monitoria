@@ -2,23 +2,46 @@ export namespace NsMonitoriaRepo {
   export type SelectInput = { monitoriaId: number }
   export type SelectOutput = Array<{
     CodigoMonitoria: number
-    CodigoAuditoria: number
-    CodigoConsultor: number
     NumeroCaso: string
     DataAtendimento: string
-    SiglaCanal: 'C' | 'V'
     NumeroTranscricao: string
     DuracaoLigacao: string
-    CodigoAssuntoContato: number
-    CodigoMonitor: number
-    CodigoAmostragem: number
     DataCriacaoMonitoria: string
     ComentarioGeral: string
     CodigoChecklistMonitoria: number
-    CodigoSubItemIndicador: number
     Nota: number
     Status: string
     Comentario: string
+    CodigoAuditoria: number
+    DescAuditoria: string
+    CodigoConsultor: number
+    NomeConsultor: string
+    EmailConsultor: string
+    VsConsultor: string
+    TempoCasa: string
+    CelulaAtendimento: string
+    Supervisor: string
+    NumeroAvaya: string
+    CodigoMonitor: number
+    NomeMonitor: string
+    VsMonitor: string
+    CodigoAmostragem: number
+    DescAmostragem: string
+    CodigoAssuntoContato: number
+    DescAssuntoContato: string
+    CodigoSubMotivoContato: number
+    DescSubMotivoContato: string
+    CodigoMotivoContato: number
+    DescMotivoContato: string
+    CodigoIndicador: number
+    DescIndicador: string
+    CodigoItemIndicador: number
+    DescItemIndicador: string
+    CodigoSubItemIndicador: number
+    DescSubItemIndicador: string
+    Resumo: string
+    SiglaCanal: 'C' | 'V'
+    Peso: number
   }> | undefined
 
   export type InsertInput = {
@@ -26,9 +49,9 @@ export namespace NsMonitoriaRepo {
     canalAtendimento: 'C' | 'V'
     consultorId: number
     monitorId: number
-    numeroCaso: number
+    numeroCaso: string
     dataAtendimento: string
-    transcricaoId: number
+    transcricaoId: string
     tempoLigacao: string
     assuntoContatoId: number
     amostragemId: number

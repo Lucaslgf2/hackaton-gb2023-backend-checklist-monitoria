@@ -5,9 +5,9 @@ export namespace NsMonitoria {
     monitoriaId: number
     dataMonitoria: string
     canalAtendimento: 'Chat' | 'Voz'
-    numeroCaso: number
+    numeroCaso: string
     dataAtendimento: string
-    transcricaoId: number
+    transcricaoId: string
     tempoLigacao: string
     comentarioGeral: string
     checklistMonitoria: Array<{
@@ -72,9 +72,9 @@ export namespace NsMonitoria {
     canalAtendimento: 'C' | 'V'
     consultorId: number
     monitorId: number
-    numeroCaso: number
+    numeroCaso: string
     dataAtendimento: string
-    transcricaoId: number
+    transcricaoId: string
     tempoLigacao: string
     assuntoContatoId: number
     amostragemId: number
