@@ -10,5 +10,7 @@ export const MySqlDataSource = new DataSource({
   password: 'yZXGRWMqqA35KCUZDP0PIPSi6O0',
   database: 'dbo',
   logging: true,
-  migrations: ['./src/infra/adapters/typeorm/migrations/*.ts']
+  migrations: [`${process.env.STAGE === 'local' ? './.build' : './src'}/infra/adapters/typeorm/migrations/*.{js,ts}`]
 })
+
+MySqlDataSource.initialize().then(() => {}).catch((error) => { console.error('MySqlDataSource.initialize', error) })

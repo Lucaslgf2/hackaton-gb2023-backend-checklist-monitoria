@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm'
-import { MySqlDataSource } from './data-source.ts'
+import { MySqlDataSource } from './data-source'
 
 export abstract class TypeORMConnection {
   private readonly appDataSource: DataSource
