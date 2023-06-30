@@ -1,7 +1,11 @@
 export namespace NsAssuntoContato {
-  export type Input = null
+  export type Input = { motivoSubContatoId: number }
 
-  export type Output = [] | undefined
+  export type Output = Array<{
+    motivoSubContatoId: number
+    assuntoContatoId: number
+    descricao: string
+  }> | undefined
 }
 
 export interface IFindAssuntoContato {

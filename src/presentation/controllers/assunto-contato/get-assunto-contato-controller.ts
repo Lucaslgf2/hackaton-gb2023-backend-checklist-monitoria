@@ -16,7 +16,9 @@ export class GetAssuntoContatoController implements IController {
       return badRequest(error)
     }
 
-    const result = await this.findAssuntoContato.find(null)
+    const { motivoSubContatoId } = httpRequest.queryParams
+
+    const result = await this.findAssuntoContato.find({ motivoSubContatoId })
     return result ? ok(result) : notFound()
   }
 }

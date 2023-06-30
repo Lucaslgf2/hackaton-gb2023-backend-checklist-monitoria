@@ -1,18 +1,13 @@
 import { IValidation } from '@/presentation/protocols'
+import { RequiredFieldValidation } from '@/validation/validators/required-field-validation'
+import { TypeValidation } from '@/validation/validators/type-validation'
 import { ValidationComposite } from '@/validation/validators/validation-composite'
 
 export const makeGetAssuntoContatoValidation = (): IValidation => {
   const validations: IValidation[] = []
 
-  // validations.push(new RequiredFieldValidation('startCurrentDate'))
-  // validations.push(new RequiredFieldValidation('endCurrentDate'))
-  // validations.push(new RequiredFieldValidation('startPreviousDate'))
-  // validations.push(new RequiredFieldValidation('endPreviousDate'))
-
-  // validations.push(new ISODateValidation('startCurrentDate'))
-  // validations.push(new ISODateValidation('endCurrentDate'))
-  // validations.push(new ISODateValidation('startPreviousDate'))
-  // validations.push(new ISODateValidation('endPreviousDate'))
+  validations.push(new RequiredFieldValidation('motivoSubContatoId'))
+  validations.push(new TypeValidation('motivoSubContatoId', 'number'))
 
   return new ValidationComposite(validations)
 }
