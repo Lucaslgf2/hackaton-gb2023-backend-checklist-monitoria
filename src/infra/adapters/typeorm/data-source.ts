@@ -8,7 +8,7 @@ export const MySqlDataSource = new DataSource({
   port: 3306,
   username: 'dbuseradmin',
   password: 'yZXGRWMqqA35KCUZDP0PIPSi6O0',
-  database: 'dbo2',
+  database: 'dbo',
   logging: true,
   migrations: [`${process.env.STAGE === 'local' ? './.build' : './src'}/infra/adapters/typeorm/migrations/*.{js,ts}`]
 })

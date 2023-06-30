@@ -9,6 +9,7 @@ export namespace NsConsultor {
     vs: string
     celulaAtendimento: string
     supervisor: string
+    avayaId: string
   }> | undefined
 }
 

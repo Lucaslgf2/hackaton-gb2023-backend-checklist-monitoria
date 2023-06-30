@@ -16,7 +16,8 @@ export class FindConsultor implements IFindConsultor {
         vs: item.Vs,
         tempoCasa: item.TempoCasa,
         celulaAtendimento: item.CelulaAtendimento,
-        supervisor: item.Supervisor
+        supervisor: item.Supervisor,
+        avayaId: item.NumeroAvaya
       }
     })
   }

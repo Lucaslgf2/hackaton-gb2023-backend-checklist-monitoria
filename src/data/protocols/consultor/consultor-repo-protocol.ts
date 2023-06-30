@@ -9,6 +9,7 @@ export namespace NsConsultorRepo {
     TempoCasa: string
     CelulaAtendimento: string
     Supervisor: string
+    NumeroAvaya: string
   }> | undefined
 }
 

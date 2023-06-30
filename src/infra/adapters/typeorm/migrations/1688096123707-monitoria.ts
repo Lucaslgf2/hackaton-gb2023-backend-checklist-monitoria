@@ -42,10 +42,6 @@ export class Monitoria_ChecklistMonitoria_1688096123707 implements MigrationInte
           type: 'integer'
         },
         {
-          name: 'IdAvaya',
-          type: 'integer'
-        },
-        {
           name: 'CodigoMotivoContato',
           type: 'integer'
         },

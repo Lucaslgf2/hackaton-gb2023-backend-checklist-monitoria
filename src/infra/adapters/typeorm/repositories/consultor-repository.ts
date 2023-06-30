@@ -5,7 +5,7 @@ export class ConsultorRepository extends TypeORMConnection implements IConsultor
   async select (params: NsConsultorRepo.Input): Promise<NsConsultorRepo.Output> {
     const querySql = `
       SELECT
-        CodigoConsultor, Nome, Email, Vs, TempoCasa, CelulaAtendimento, Supervisor
+        CodigoConsultor, Nome, Email, Vs, TempoCasa, CelulaAtendimento, Supervisor, NumeroAvaya
       FROM Consultor
       WHERE 1=1
         ${params.consultorId ? `AND CodigoConsultor=${params.consultorId}` : ''}
@@ -23,7 +23,8 @@ export class ConsultorRepository extends TypeORMConnection implements IConsultor
         Vs: item.Vs,
         TempoCasa: item.TempoCasa,
         CelulaAtendimento: item.CelulaAtendimento,
-        Supervisor: item.Supervisor
+        Supervisor: item.Supervisor,
+        NumeroAvaya: item.NumeroAvaya
       }))
     }
   }
