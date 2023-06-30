@@ -1,0 +1,15 @@
+  {{camelCase name}}:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/{{dashCase name}}-route.{{lowerCase verb}}{{pascalCase name}}Handler'
+    events:
+      - http:
+          path: /{{dashCase name}}
+          method: {{lowerCase verb}}
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+# PLOP_REPLACE

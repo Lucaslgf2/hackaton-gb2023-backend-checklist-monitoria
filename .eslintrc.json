@@ -1,24 +1,32 @@
 {
-  "env": {
-    "commonjs": true,
-    "es2021": true,
-    "node": true,
-    "jest/globals": true
-  },
-  "extends": [
-    "standard",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:jest/recommended",
-    "plugin:n/recommended",
-    "plugin:prettier/recommended",
-    "plugin:promise/recommended"
-  ],
-  "plugins": ["jest", "prettier"],
+  "extends": "standard-with-typescript",
   "parserOptions": {
-    "ecmaVersion": 13
+    "project": "./tsconfig.json"
   },
   "rules": {
-    "space-before-function-parent": 0
-  }
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/naming-convention": ["error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]",
+          "match": true
+        }
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/naming-convention": "off"
+      }
+    }
+  ]
 }

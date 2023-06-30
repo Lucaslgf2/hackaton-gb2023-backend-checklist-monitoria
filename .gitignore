@@ -115,6 +115,9 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
+# TypeScript v1 declaration files
+typings/
+
 # Optional npm cache directory
 .npm
 
@@ -142,6 +145,7 @@ web_modules/
 # dotenv environment variable files
 .env
 .env.dev
+.env.test
 .env.development.local
 .env.hml
 .env.prd
@@ -235,3 +239,14 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/git,node,linux,macos,windows
+
+# Others
+.vs/
+.build/
+.serverless/
+coverage/
+dist/
+lib/
+temp/
+.tsbuildinfo
+.npmrc

@@ -1,13 +1,25 @@
+# Description: Serverless configuration for PRD environment
+
 provider:
   memorySize: 256
-  timeout: 6
+  timeout: 30
   vpc:
     securityGroupIds:
       - sg-0254e55e977f8cbe2
     subnetIds:
       - subnet-07003e61aa538b0d3
       - subnet-08b21520f5213826f
+
 environment:
   AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
   NODE_ENV: production
-  NEW_RELIC_LOG_LEVEL: error
+  NEW_RELIC_EXTENSION_SEND_FUNCTION_LOGS: true
+  NEW_RELIC_LICENSE_KEY: local
+  NEW_RELIC_LOG_LEVEL: debug
+
+  ENVIRONMENT: local
+  STAGE: local
+  LANG: pt_BR.UTF-8
+  TZ: America/Sao_Paulo
+
+  REDIS_CACHE_ENABLED: false

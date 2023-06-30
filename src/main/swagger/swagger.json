@@ -1,0 +1,175 @@
+{
+  "openapi": "3.0.3",
+
+  "info": {
+    "title": "Hackaton",
+    "description": "",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support",
+      "url": "http://www.example.com/support",
+      "email": "support@example.com"
+    }
+  },
+
+  "servers": [
+
+  ],
+
+  "tags": [
+
+  ],
+
+  "paths": {
+    "/monitoria": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/assunto-contato": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/sub-motivo-contato": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/motivo-contato": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/monitoria": {
+      "post": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/amostragem": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/monitor": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/auditoria": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
+    "/consultor": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+
+  },
+
+  "components": {
+    "parameters": {
+
+    },
+
+    "schemas": {
+
+    },
+
+    "responses": {
+
+    }
+  }
+
+}

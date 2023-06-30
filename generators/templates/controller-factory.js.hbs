@@ -1,0 +1,8 @@
+import { makeFind{{pascalCase name}} } from '@/main/factories/use-cases/{{dashCase name}}/find-{{dashCase name}}-factory'
+import { {{pascalCase verb}}{{pascalCase name}}Controller } from '@/presentation/controllers/{{dashCase name}}/{{dashCase verb}}-{{dashCase name}}-controller'
+import { IController } from '@/presentation/protocols'
+import { make{{pascalCase verb}}{{pascalCase name}}Validation } from './validation/{{dashCase verb}}-{{dashCase name}}-validation-factory'
+
+export const make{{pascalCase verb}}{{pascalCase name}}Controller = (): IController => {
+  return new {{pascalCase verb}}{{pascalCase name}}Controller(make{{pascalCase verb}}{{pascalCase name}}Validation(), makeFind{{pascalCase name}}())
+}

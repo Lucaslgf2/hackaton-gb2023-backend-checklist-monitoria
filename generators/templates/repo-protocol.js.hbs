@@ -1,0 +1,9 @@
+export namespace Ns{{pascalCase name}}Repo {
+  export type Input = null
+
+  export type Output = [] | undefined
+}
+
+export interface I{{pascalCase name}}Repo {
+  select: (params: Ns{{pascalCase name}}Repo.Input) => Promise<Ns{{pascalCase name}}Repo.Output>
+}
