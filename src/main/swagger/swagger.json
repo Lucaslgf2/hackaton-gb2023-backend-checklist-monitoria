@@ -21,6 +21,21 @@
   ],
 
   "paths": {
+    "/monitoria": {
+      "get": {
+        "tags": ["---"],
+        "summary": "Recupera as informações para ???'.",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+
     "/assunto-contato": {
       "get": {
         "tags": ["---"],

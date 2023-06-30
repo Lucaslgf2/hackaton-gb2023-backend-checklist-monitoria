@@ -228,20 +228,6 @@ functions:
             headers: '*'
           private: true
 
-  monitoria:
-    enabled: true
-    disableLogs: true
-    architecture: ${self:provider.architecture}
-    handler: 'src/main/routes/monitoria-route.postMonitoriaHandler'
-    events:
-      - http:
-          path: /monitoria
-          method: post
-          cors:
-            origin: '*'
-            headers: '*'
-          private: true
-
   motivoContato:
     enabled: true
     disableLogs: true
@@ -286,6 +272,41 @@ functions:
       - http:
           path: /assunto-contato
           method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+  monitoria:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/monitoria-route.getMonitoriaHandler'
+    events:
+      - http:
+          path: /monitoria
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+      - http:
+          path: /monitoria/{monitoriaId}
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
+
+  monitoriaPost:
+    enabled: true
+    disableLogs: true
+    architecture: ${self:provider.architecture}
+    handler: 'src/main/routes/monitoria-route.postMonitoriaHandler'
+    events:
+      - http:
+          path: /monitoria
+          method: post
           cors:
             origin: '*'
             headers: '*'

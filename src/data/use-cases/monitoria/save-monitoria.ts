@@ -6,7 +6,7 @@ export class SaveMonitoria implements ISaveMonitoria {
     private readonly monitoriaRepo: IMonitoriaRepo
   ) {}
 
-  async save (params: NsMonitoria.Input): Promise<NsMonitoria.Output> {
+  async save (params: NsMonitoria.SaveInput): Promise<NsMonitoria.SaveOutput> {
     const resultDb = await this.monitoriaRepo.insert(params)
     if (resultDb) {
       return { monitoriaId: resultDb.CodigoMonitoria }

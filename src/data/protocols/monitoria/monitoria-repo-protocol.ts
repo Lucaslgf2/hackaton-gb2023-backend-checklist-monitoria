@@ -1,5 +1,27 @@
 export namespace NsMonitoriaRepo {
-  export type Input = {
+  export type SelectInput = { monitoriaId: number }
+  export type SelectOutput = Array<{
+    CodigoMonitoria: number
+    CodigoAuditoria: number
+    CodigoConsultor: number
+    NumeroCaso: string
+    DataAtendimento: string
+    SiglaCanal: 'C' | 'V'
+    NumeroTranscricao: string
+    DuracaoLigacao: number
+    CodigoAssuntoContato: number
+    CodigoMonitor: number
+    CodigoAmostragem: number
+    DataCriacaoMonitoria: string
+    ComentarioGeral: string
+    CodigoChecklistMonitoria: number
+    CodigoSubItemIndicador: number
+    Nota: number
+    Status: string
+    Comentario: string
+  }> | undefined
+
+  export type InsertInput = {
     auditoriaId: number
     canalAtendimento: 'C' | 'V'
     consultorId: number
@@ -18,10 +40,10 @@ export namespace NsMonitoriaRepo {
       comentario: string
     }>
   }
-
-  export type Output = { CodigoMonitoria: number } | undefined
+  export type InsertOutput = { CodigoMonitoria: number } | undefined
 }
 
 export interface IMonitoriaRepo {
-  insert: (params: NsMonitoriaRepo.Input) => Promise<NsMonitoriaRepo.Output>
+  select: (params: NsMonitoriaRepo.SelectInput) => Promise<NsMonitoriaRepo.SelectOutput>
+  insert: (params: NsMonitoriaRepo.InsertInput) => Promise<NsMonitoriaRepo.InsertOutput>
 }
