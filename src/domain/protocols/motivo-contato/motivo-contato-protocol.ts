@@ -1,7 +1,10 @@
 export namespace NsMotivoContato {
-  export type Input = null
+  export type Input = { motivoContatoId?: number }
 
-  export type Output = [] | undefined
+  export type Output = Array<{
+    motivoContatoId: number
+    descricao: string
+  }> | undefined
 }
 
 export interface IFindMotivoContato {

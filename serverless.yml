@@ -255,6 +255,13 @@ functions:
             origin: '*'
             headers: '*'
           private: true
+      - http:
+          path: /motivo-contato/{motivoContatoId}
+          method: get
+          cors:
+            origin: '*'
+            headers: '*'
+          private: true
 
   subMotivoContato:
     enabled: true

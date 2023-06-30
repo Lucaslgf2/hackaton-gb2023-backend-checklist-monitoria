@@ -5,7 +5,7 @@ export class ConsultorRepository extends TypeORMConnection implements IConsultor
   async select (params: NsConsultorRepo.Input): Promise<NsConsultorRepo.Output> {
     const querySql = `
       SELECT
-        CodigoConsultor, Nome, Email, Vs, TempoCasa, CelularAtendimento, Supervisor
+        CodigoConsultor, Nome, Email, Vs, TempoCasa, CelulaAtendimento, Supervisor
       FROM Consultor
       WHERE 1=1
         ${params.consultorId ? `AND CodigoConsultor=${params.consultorId}` : ''}

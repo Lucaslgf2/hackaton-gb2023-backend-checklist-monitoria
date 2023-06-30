@@ -1,7 +1,11 @@
 export namespace NsSubMotivoContatoRepo {
-  export type Input = null
+  export type Input = { motivoContatoId: number }
 
-  export type Output = [] | undefined
+  export type Output = Array<{
+    CodigoMotivoContato: number
+    CodigoSubMotivoContato: number
+    Descricao: string
+  }> | undefined
 }
 
 export interface ISubMotivoContatoRepo {

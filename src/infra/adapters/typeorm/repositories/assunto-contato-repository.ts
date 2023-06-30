@@ -1,5 +1,5 @@
 import { IAssuntoContatoRepo, NsAssuntoContatoRepo } from '@/data/protocols/assunto-contato/assunto-contato-repo-protocol'
-import { TypeORMConnection } from '../typeorm-connection'
+import { TypeORMConnection } from '@/infra/adapters/typeorm/typeorm-connection'
 
 export class AssuntoContatoRepository extends TypeORMConnection implements IAssuntoContatoRepo {
   async select (params: NsAssuntoContatoRepo.Input): Promise<NsAssuntoContatoRepo.Output> {

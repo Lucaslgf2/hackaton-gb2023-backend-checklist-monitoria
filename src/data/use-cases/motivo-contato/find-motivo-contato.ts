@@ -8,6 +8,11 @@ export class FindMotivoContato implements IFindMotivoContato {
 
   async find (params: NsMotivoContato.Input): Promise<NsMotivoContato.Output> {
     const dbRows = await this.motivoContatoRepo.select(params)
-    return dbRows
+    return dbRows?.map(item => {
+      return {
+        motivoContatoId: item.CodigoMotivoContato,
+        descricao: item.Descricao
+      }
+    })
   }
 }

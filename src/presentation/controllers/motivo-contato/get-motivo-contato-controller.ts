@@ -11,12 +11,14 @@ export class GetMotivoContatoController implements IController {
 
   @ErrorHandler()
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const error = this.validation.validate(httpRequest.queryParams)
+    const error = this.validation.validate(httpRequest.pathParams)
     if (error) {
       return badRequest(error)
     }
 
-    const result = await this.findMotivoContato.find(null)
+    const { motivoContatoId } = httpRequest.pathParams
+
+    const result = await this.findMotivoContato.find({ motivoContatoId })
     return result ? ok(result) : notFound()
   }
 }

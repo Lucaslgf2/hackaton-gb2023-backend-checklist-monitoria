@@ -8,6 +8,12 @@ export class FindSubMotivoContato implements IFindSubMotivoContato {
 
   async find (params: NsSubMotivoContato.Input): Promise<NsSubMotivoContato.Output> {
     const dbRows = await this.subMotivoContatoRepo.select(params)
-    return dbRows
+    return dbRows?.map(item => {
+      return {
+        motivoContatoId: item.CodigoMotivoContato,
+        subMotivoContatoId: item.CodigoSubMotivoContato,
+        descricao: item.Descricao
+      }
+    })
   }
 }
