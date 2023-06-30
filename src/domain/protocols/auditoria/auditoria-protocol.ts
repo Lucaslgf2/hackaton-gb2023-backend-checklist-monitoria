@@ -1,8 +1,5 @@
 export namespace NsAuditoria {
-  export type Input = {
-    auditoriaId?: number
-    canalAtendimento: 'C' | 'V'
-  }
+  export type Input = { canalAtendimento: 'C' | 'V', auditoriaId?: number }
 
   export type SubItemModel = {
     subItemId: number

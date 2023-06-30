@@ -1,5 +1,5 @@
 export namespace NsAuditoriaRepo {
-  export type Input = { auditoriaId?: number }
+  export type Input = { canalAtendimento: 'C' | 'V', auditoriaId?: number }
 
   export type Output = Array<{
     CodigoAuditoria: number
@@ -11,6 +11,7 @@ export namespace NsAuditoriaRepo {
     CodigoSubItemIndicador: number
     DescSubItemIndicador: string
     Resumo: string
+    SiglaCanal: string
     Peso: number
   }> | undefined
 }

@@ -93,24 +93,12 @@ export class Monitoria_ChecklistMonitoria_1688096123707 implements MigrationInte
           referencedColumnNames: ['SiglaCanal'],
           referencedTableName: 'CanalAtendimento'
         },
-        // {
-        //  name: 'FK_Monitoria_MotivoContato_CodigoMotivoContato',
-        //  columnNames: ['CodigoMotivoContato'],
-        //  referencedColumnNames: ['CodigoMotivoContato'],
-        //  referencedTableName: 'MotivoContato'
-        // },
-        // {
-        //  name: 'FK_Monitoria_SubMotivoContato_CodigoSubMotivoContato',
-        //  columnNames: ['CodigoSubMotivoContato'],
-        //  referencedColumnNames: ['CodigoSubMotivoContato'],
-        //  referencedTableName: 'SubMotivoContato'
-        // },
-        // {
-        //  name: 'FK_Monitoria_AssuntoContato_CodigoAssuntoContato',
-        //  columnNames: ['CodigoAssuntoContato'],
-        //  referencedColumnNames: ['CodigoAssuntoContato'],
-        //  referencedTableName: 'AssuntoContato'
-        // },
+        {
+          name: 'FK_Monitoria_AssuntoContato_CodigoAssuntoContato',
+          columnNames: ['CodigoAssuntoContato'],
+          referencedColumnNames: ['CodigoAssuntoContato'],
+          referencedTableName: 'AssuntoContato'
+        },
         {
           name: 'FK_Monitoria_Monitor_CodigoMonitor',
           columnNames: ['CodigoMonitor'],

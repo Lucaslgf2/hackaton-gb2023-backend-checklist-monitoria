@@ -40,7 +40,7 @@ export const makeEnvVariables = () => {
       port: process.env.RDS_CONN_PORT ? Number(process.env.RDS_CONN_PORT) : 3306,
       username: process.env.RDS_CONN_USERNAME ?? '',
       password: process.env.RDS_CONN_PASSWORD ?? '',
-      database: 'dbo'
+      database: 'dbo2'
     },
 
     redisCache: {
